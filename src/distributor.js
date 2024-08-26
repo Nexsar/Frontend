@@ -80,3 +80,33 @@ export const updateDescription = async (description, distributorAddress, post_id
         console.error("Error in updating description:", error);
     }
 }
+
+export const updateOptions = async (options, distributorAddress, post_id) => {
+    try {
+        const contract = await getContract();
+        if (!Array.isArray(options) && options.length !== 3) {
+            throw new Error("Options should be an array of Length (3)");
+        }
+        const tx = await contract.updateOptions(options, distributorAddress, post_id);
+        await tx.wait();
+        console.log("Options Updated:", tx);
+    } catch (error) {
+        console.error("Error in updating options:", error);
+    }
+}
+
+export const updateVotes = async (votes, distributorAddress, post_id) => {
+    try {
+        const contract = await getContract();
+        if (!Array.isArray(votes) && votes.length !== 3) {
+            throw new Error("Votes should be an array of Length (3)");
+        }
+        const tx = await contract.updateVotes(votes, distributorAddress, post_id);
+        await tx.wait();
+        console.log("Votes Updated:", tx);
+    } catch (error) {
+        console.error("Error in updating votes:", error);
+    }
+}
+
+/////////////////////////////// OPTIONS \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
