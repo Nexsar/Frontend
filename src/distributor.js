@@ -95,13 +95,13 @@ export const updateOptions = async (options, distributorAddress, post_id) => {
     }
 }
 
-export const updateVotes = async (votes, distributorAddress, post_id) => {
+export const updateVotes = async (votes, distributorAddress, postId) => {
     try {
         const contract = await getContract();
         if (!Array.isArray(votes) && votes.length !== 3) {
             throw new Error("Votes should be an array of Length (3)");
         }
-        const tx = await contract.updateVotes(votes, distributorAddress, post_id);
+        const tx = await contract.updateVotes(votes, distributorAddress, postId);
         await tx.wait();
         console.log("Votes Updated:", tx);
     } catch (error) {
@@ -110,3 +110,27 @@ export const updateVotes = async (votes, distributorAddress, post_id) => {
 }
 
 /////////////////////////////// OPTIONS \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+export const updateVote = async (votes, distributorAddress, postId, optionId) => {
+    try {
+        const contract = await getContract();
+        const tx = await contract.updateVote(votes, distributorAddress, postId, optionId);
+        await tx.wait();
+        console.log("Vote Updated:", tx);
+    } catch (error) {
+        console.error("Error in updating vote:", error);
+    }
+}
+
+export const updateImageUrl = async (url, distributorAddress, postId, optionId) => {
+    try {
+        const contract = await getContract();
+        const tx = await contract.updateImageUrl(url, distributorAddress, postId, optionId);
+        await tx.wait();
+        console.log("Image URL Updated:", tx);
+    } catch (error) {
+        console.error("Error in updating image URL:", error);
+    }
+}
+
+/////////////////////////////// Getters \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
