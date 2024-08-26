@@ -1,9 +1,9 @@
 import { ethers } from "ethers";
 import { getSigner } from "./wallet.js";
-import distributorJson from '../contract/Workers.json' assert { type: "json" };
+import workersJson from '../contract/Workers.json' assert { type: "json" };
 
 const contractAddress = "YOUR_CONTRACT_ADDRESS";
-let contractABI = distributorJson.abi;
+let contractABI = workersJson.abi;
 console.log(contractABI);
 
 export const getContract = async () => {
