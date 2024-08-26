@@ -67,3 +67,49 @@ export const withdrawRewards = async () => {
         console.error("Error in withdrawing rewards:", error);
     }
 }
+
+/////////////////////////////// Getters \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+export const getWorker = async (workerAddress) => {
+    try {
+        const contract = await getContract();
+        const worker = await contract.getWorker(workerAddress);
+        return worker;
+    } catch (error) {
+        console.error("Error in getting worker:", error);
+        return null;
+    }
+}
+
+export const getRewards = async (workerAddress) => {
+    try {
+        const contract = await getContract();
+        const rewards = await contract.getRewards(workerAddress);
+        return rewards;
+    } catch (error) {
+        console.error("Error in getting rewards:", error);
+        return null;
+    }
+}
+
+export const getVotedOption = async (workerAddress, post_id) => {
+    try {
+        const contract = await getContract();
+        const voted_option = await contract.getVotedOption(workerAddress, post_id);
+        return voted_option;
+    } catch (error) {
+        console.error("Error in getting voted option:", error);
+        return null;
+    }
+}
+
+export const getAllWorkersRewards = async (/*list*/ workerAddresses) => {
+    try {
+        const contract = await getContract();
+        const all_workers_rewards = await contract.getAllWorkersRewards(workerAddresses);
+        return all_workers_rewards;
+    } catch (error) {
+        console.error("Error in getting all workers rewards:", error);
+        return null;
+    }
+}
