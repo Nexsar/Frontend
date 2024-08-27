@@ -1,15 +1,21 @@
 import { ethers } from "ethers";
-import { getSigner } from "./wallet.js";
 import distributorJson from '../contract/Distributors.json' assert { type: "json" };
 
 const contractAddress = "YOUR_CONTRACT_ADDRESS";
 let contractABI = distributorJson.abi;
 // console.log(contractABI); // WORKING....
 
-export const getContract = async () => {
-    const signer = getSigner();
-    return new ethers.Contract(contractAddress, contractABI, signer);
+const getContract = async () => {
+    if (typeof window.ethereum !== 'undefined') {
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        return new ethers.Contract(contractAddress, contractABI, signer);
+    } else {
+        throw new Error("Ethereum object not found, install MetaMask.");
+    }
 };
+
 
 /////////////////////////////// DISTRIBUTORS \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 

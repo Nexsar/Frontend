@@ -1,14 +1,19 @@
 import { ethers } from "ethers";
-import { getSigner } from "./wallet.js";
-import workersJson from '../contract/Workers.json' assert { type: "json" };
+import workersJson from '../contract/Workers.json';
 
-const contractAddress = "YOUR_CONTRACT_ADDRESS";
+const contractAddress = "0xc8E520399066803f96D2566C208aCb1AC94fAd4F";
 let contractABI = workersJson.abi;
 console.log(contractABI);
 
-export const getContract = async () => {
-    const signer = getSigner();
-    return new ethers.Contract(contractAddress, contractABI, signer);
+const getContract = async () => {
+    if (typeof window.ethereum !== 'undefined') {
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        return new ethers.Contract(contractAddress, contractABI, signer);
+    } else {
+        throw new Error("Ethereum object not found, install MetaMask.");
+    }
 };
 
 /////////////////////////////// WORKERS \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -24,10 +29,10 @@ export const initWorker = async () => {
     }
 }
 
-export const removeWorker = async (wrokerAddress) => {
+export const removeWorker = async (workerAddress) => {
     try {
         const contract = await getContract();
-        const tx = await contract.removeWorker(wrokerAddress);
+        const tx = await contract.removeWorker(workerAddress);
         await tx.wait();
         console.log("Worker Removed:", tx);
     } catch (error) {
