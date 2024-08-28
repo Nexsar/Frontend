@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import distributorJson from '../contract/Distributors.json' assert { type: "json" };
+import distributorJson from './contract/Distributors.json';
 
 const contractAddress = "YOUR_CONTRACT_ADDRESS";
 let contractABI = distributorJson.abi;

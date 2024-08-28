@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import workersJson from '../contract/Workers.json';
+import workersJson from './contract/Workers.json';
 
 const contractAddress = "0xc8E520399066803f96D2566C208aCb1AC94fAd4F";
 let contractABI = workersJson.abi;
