@@ -1,7 +1,7 @@
 import { ethers } from "ethers";
 import distributorJson from './contract/Distributors.json';
 
-const contractAddress = "YOUR_CONTRACT_ADDRESS";
+const contractAddress = "0x7B5B43d1D8a6bF00437C4Aa38E8844655058713e";
 let contractABI = distributorJson.abi;
 // console.log(contractABI); // WORKING....
 
@@ -16,39 +16,71 @@ const getContract = async () => {
     }
 };
 
+//////////////////
+// DISTRIBUTORS //
+//////////////////
 
-/////////////////////////////// DISTRIBUTORS \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-
-export const initDistributor = async (listed, budget, frequency, posts) => {
+export const initDistributor = async (listed, initialBudget, initialFrequency, postId, description, optionIds, imageUrls) => {
     try {
         const contract = await getContract();
-        const tx = await contract.initDistributor(listed, budget, frequency, posts, { value: ethers.utils.parseEther(budget.toString()) });
+        const tx = await contract.initDistributor(listed, initialBudget, initialFrequency, postId, description, optionIds, imageUrls); // CHECK::> Do we need to convert Budget??
         await tx.wait();
         console.log("Distributor Initialized:", tx);
+        return tx;
     } catch (error) {
         console.error("Error in initializing distributor:", error);
     }
 };
 
-export const updateBudget = async (budget, distributorAddress) => {
+export const depositETH = async () => {
     try {
         const contract = await getContract();
-        const tx = await contract.updateBudget(budget, distributorAddress, { value: ethers.utils.parseEther(budget.toString()) });
+        const tx = await contract.updateBudget();
         await tx.wait();
         console.log("Budget Updated:", tx);
+        return tx;
     } catch (error) {
         console.error("Error in updating budget:", error);
     }
 };
 
-export const withdrawFromBudget = async (amount, distributorAddress) => {
+export const withdrawETH = async (amount) => {
     try {
         const contract = await getContract();
-        const tx = await contract.withdrawFromBudget(amount, distributorAddress)
+        const tx = await contract.withdrawFromBudget(amount)
         await tx.wait();
         console.log("Amount Withdrawn:", tx);
+        return tx;
     } catch (error) {
         console.error("Error in withdrawing from budget:", error);
+    }
+}
+
+export const addPost = async (postId, description, optionIds, ImageUrls, distributorAddress) => {
+    try {
+        const contract = await getContract();
+        const tx = await contract.addPost(postId, description, optionIds, ImageUrls, distributorAddress);
+        await tx.wait();
+        console.log("Frequency Updated:", tx);
+        return tx;
+    } catch (error) {
+        console.error("Error in updating frequency:", error);
+    }
+}
+
+//////////////
+// UPDATERS //
+//////////////
+
+export const updateBudget = async (budget, distributorAddress) => {
+    try {
+        const contract = await getContract();
+        const tx = await contract.updateBudget(budget, distributorAddress);
+        await tx.wait();
+        console.log("Posts Updated:", tx);
+        return tx;
+    } catch (error) {
+        console.error("Error in updating posts:", error);
     }
 }
 
@@ -57,89 +89,55 @@ export const updateFrequency = async (frequency, distributorAddress) => {
         const contract = await getContract();
         const tx = await contract.updateFrequency(frequency, distributorAddress);
         await tx.wait();
-        console.log("Frequency Updated:", tx);
-    } catch (error) {
-        console.error("Error in updating frequency:", error);
-    }
-}
-
-export const updatePosts = async (post, distributorAddress) => {
-    try {
-        const contract = await getContract();
-        const tx = await contract.updatePosts(post, distributorAddress);
-        await tx.wait();
-        console.log("Posts Updated:", tx);
-    } catch (error) {
-        console.error("Error in updating posts:", error);
-    }
-}
-
-/////////////////////////////// POSTS \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-
-export const updateDescription = async (description, distributorAddress, post_id) => {
-    try {
-        const contract = await getContract();
-        const tx = await contract.updateDescription(description, distributorAddress, post_id);
-        await tx.wait();
         console.log("Description Updated:", tx);
+        return tx;
     } catch (error) {
         console.error("Error in updating description:", error);
     }
 }
 
-export const updateOptions = async (options, distributorAddress, post_id) => {
+export const updateDescription = async (description, postId, distributorAddress) => {
     try {
         const contract = await getContract();
-        if (!Array.isArray(options) && options.length !== 3) {
-            throw new Error("Options should be an array of Length (3)");
-        }
-        const tx = await contract.updateOptions(options, distributorAddress, post_id);
+        const tx = await contract.updateDescription(description, postId, distributorAddress);
         await tx.wait();
         console.log("Options Updated:", tx);
+        return tx;
     } catch (error) {
         console.error("Error in updating options:", error);
     }
 }
 
-export const updateVotes = async (votes, distributorAddress, postId) => {
+export const updateVotes = async (votes, optionsIds, postId, distributorAddress) => {
     try {
         const contract = await getContract();
-        if (!Array.isArray(votes) && votes.length !== 3) {
-            throw new Error("Votes should be an array of Length (3)");
-        }
-        const tx = await contract.updateVotes(votes, distributorAddress, postId);
+        // if (!Array.isArray(votes) && votes.length !== 3) {
+        //     throw new Error("Votes should be an array of Length (3)");
+        // }
+        const tx = await contract.updateVotes(votes, optionsIds, postId, distributorAddress);
         await tx.wait();
         console.log("Votes Updated:", tx);
+        return tx;
     } catch (error) {
         console.error("Error in updating votes:", error);
     }
 }
 
-/////////////////////////////// OPTIONS \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-
-export const updateVote = async (votes, distributorAddress, postId, optionId) => {
+export const updateImageUrl = async (url, postId, optionId, distributorAddress) => {
     try {
         const contract = await getContract();
-        const tx = await contract.updateVote(votes, distributorAddress, postId, optionId);
+        const tx = await contract.updateImageUrl(url, postId, optionId, distributorAddress);
         await tx.wait();
         console.log("Vote Updated:", tx);
+        return tx;
     } catch (error) {
         console.error("Error in updating vote:", error);
     }
 }
 
-export const updateImageUrl = async (url, distributorAddress, postId, optionId) => {
-    try {
-        const contract = await getContract();
-        const tx = await contract.updateImageUrl(url, distributorAddress, postId, optionId);
-        await tx.wait();
-        console.log("Image URL Updated:", tx);
-    } catch (error) {
-        console.error("Error in updating image URL:", error);
-    }
-}
-
-/////////////////////////////// Getters \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+/////////////
+// Getters // 
+/////////////
 
 export const getDistributorInfo = async (distributorAddress) => {
     try {
@@ -204,8 +202,6 @@ export const ownerOfDistributor = async (distributorAddress) => {
     }
 }
 
-// ======================================= \\
-
 export const getParticularPost = async (distributorAddress, postId) => {
     try {
         const contract = await getContract();
@@ -217,10 +213,10 @@ export const getParticularPost = async (distributorAddress, postId) => {
     }
 }
 
-export const getAllOptions = async (distributorAddress, postId) => {
+export const getAllOptions = async (postId) => {
     try {
         const contract = await getContract();
-        const options = await contract.getAllOptions(distributorAddress, postId);
+        const options = await contract.getAllOptions(postId);
         return options;
     } catch (error) {
         console.error("Error fetching options:", error);
@@ -228,10 +224,10 @@ export const getAllOptions = async (distributorAddress, postId) => {
     }
 }
 
-export const getTotalVotesOnPost = async (distributorAddress, postId) => {
+export const getTotalVotesOnPost = async (postId) => {
     try {
         const contract = await getContract();
-        const totalVotes = await contract.getTotalVotesOnPost(distributorAddress, postId);
+        const totalVotes = await contract.getTotalVotesOnPost(postId);
         return totalVotes;
     } catch (error) {
         console.error("Error fetching total votes:", error);
@@ -239,37 +235,13 @@ export const getTotalVotesOnPost = async (distributorAddress, postId) => {
     }
 }
 
-// ======================================= \\
-
-export const getParticularOption = async (distributorAddress, postId, optionId) => {
+export const getAllVotesOnPost = async (postId) => {
     try {
         const contract = await getContract();
-        const option = await contract.getParticularOption(distributorAddress, postId, optionId);
-        return option;
+        const totalVotes = await contract.getAllVotesOnPost(postId);
+        return totalVotes;
     } catch (error) {
-        console.error("Error fetching option:", error);
-        return null;
-    }
-}
-
-export const getVoteOnOption = async (distributorAddress, postId, optionId) => {
-    try {
-        const contract = await getContract();
-        const vote = await contract.getVoteOnOption(distributorAddress, postId, optionId);
-        return vote;
-    } catch (error) {
-        console.error("Error fetching vote:", error);
-        return null;
-    }
-}
-
-export const getImageUrlOption = async (distributorAddress, postId, optionId) => {
-    try {
-        const contract = await getContract();
-        const imageUrl = await contract.getImageUrlOption(distributorAddress, postId, optionId);
-        return imageUrl;
-    } catch (error) {
-        console.error("Error fetching image URL:", error);
+        console.error("Error fetching total votes:", error);
         return null;
     }
 }
