@@ -8,6 +8,11 @@
         {
             "inputs": [],
             "type": "error",
+            "name": "Amount_Less_Than_0"
+        },
+        {
+            "inputs": [],
+            "type": "error",
             "name": "Distributors__BadPayload"
         },
         {
@@ -44,6 +49,11 @@
             "inputs": [],
             "type": "error",
             "name": "Distributors__PostDoesNotExist"
+        },
+        {
+            "inputs": [],
+            "type": "error",
+            "name": "Insufficient_balance"
         },
         {
             "inputs": [],
@@ -267,6 +277,12 @@
             "stateMutability": "nonpayable",
             "type": "function",
             "name": "AddPost"
+        },
+        {
+            "inputs": [],
+            "stateMutability": "payable",
+            "type": "function",
+            "name": "depositETH"
         },
         {
             "inputs": [
@@ -623,6 +639,18 @@
             "stateMutability": "nonpayable",
             "type": "function",
             "name": "updateVotes"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "amount",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "nonpayable",
+            "type": "function",
+            "name": "withdrawETH"
         }
     ]
 }
