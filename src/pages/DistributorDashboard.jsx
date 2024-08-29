@@ -7,12 +7,16 @@ import { LitNetwork } from "@lit-protocol/constants";
 const DistributorDashboard = () => {
   useEffect(() => {
     async function init() {
-      const client = new LitJsSdk.LitNodeClient({
-        litNetwork: LitNetwork.Datil,
-      });
+      try {
+        const client = new LitJsSdk.LitNodeClient({
+          litNetwork: LitNetwork.DatilDev,
+          debug: false,
+        });
 
-      const res = await client.connect();
-      console.log(res);
+        await client.connect();
+      } catch (err) {
+        console.log("error:", err);
+      }
     }
 
     init();
