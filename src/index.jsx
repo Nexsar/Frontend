@@ -4,10 +4,21 @@ import "./index.css";
 import App from "./App.jsx";
 import reportWebVitals from "./reportWebVitals.js";
 
+/* check these imports: ref: https://wagmi.sh/react/guides/connect-wallet */
+import { WagmiProvider } from "wagmi";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { config } from "./config";
+
+const queryClient = new QueryClient();
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <WagmiProvider config={config}>
+      <QueryClientProvider client={queryClient}>
+        <App />
+      </QueryClientProvider>
+    </WagmiProvider>
   </React.StrictMode>,
 );
 
