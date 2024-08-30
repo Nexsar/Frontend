@@ -16,7 +16,7 @@ const WalletMethods = ({ authWithEthWallet }) => {
           <button
             type="button"
             className="btn btn--outline bg-red-500 z-1000"
-            disabled={!connector.ready}
+            disabled={connector.ready}
             key={connector.id}
             onClick={async () => {
               console.log("i was clicked...");
