@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import WalletMethods from "./WalletMethods";
+import WalletMethods from "./WalletMethods.jsx";
 
 export default function LoginMethods({ authWithEthWallet }) {
   const [view, setView] = useState("wallet");
