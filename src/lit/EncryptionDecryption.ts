@@ -8,6 +8,7 @@ import { ethers, Wallet } from 'ethers';
 const url = `<our http endpoint for api-key :: i.e. HUGGING FACE-stable diffusion 2 urls>`;
 const key = '<our HUGGING FACE api key>';
 
+// Decrypt functionality
 const genActionSource = (url: string) => {
     return (async () => {
         const apiKey = await Lit.Actions.decryptAndCombine({
@@ -30,7 +31,7 @@ const genActionSource = (url: string) => {
         });
         let data = await resp.json();
 
-        Lit.Actions.setResponse({ response: apiKey });
+        Lit.Actions.setResponse({ response: data });
     })();
 }
 
