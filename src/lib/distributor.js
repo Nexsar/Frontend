@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import distributorJson from './contract/Distributors.json';
+import distributorJson from '../contract/Distributors.json';
 
 const contractAddress = "0x7B5B43d1D8a6bF00437C4Aa38E8844655058713e";
 let contractABI = distributorJson.abi;

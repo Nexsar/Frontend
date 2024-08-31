@@ -11,7 +11,7 @@ import {
   getRewards,
   getVotedOption,
   getAllWorkersRewards,
-} from "../worker.js"; // Adjust the path if necessary
+} from "../lib/worker.js"; // Adjust the path if necessary
 
 const SmartContractUI = () => {
   const [output, setOutput] = useState("");
