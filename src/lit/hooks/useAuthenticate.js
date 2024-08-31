@@ -1,33 +1,60 @@
-import { useCallback } from "react";
-import { React } from "react";
-import { useConnect } from "wagmi";
-import { authenticateWithEthWallet } from "../utils/lit";
+import { useCallback, useState, useEffect } from 'react';
+import {
+  authenticateWithEthWallet,
+} from '../utils/lit';
+import { useConnect } from 'wagmi';
+
 
 export default function useAuthenticate(redirectUri) {
-  // wagmi hook
+  const [authMethod, setAuthMethod] = useState();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState();
+
   const { connectAsync } = useConnect({
     onError: (err) => {
-      console.log("error on connect async....");
+      setError(err );
     },
   });
 
-  const authWithEthWallet = async (connector) => {
-    console.log("here in auth with eth wallet, useauthenticate.js");
-    try {
-      const { account, connector: activeConnector } =
-        await connectAsync(connector);
-      const signer = await activeConnector.getSigner();
-      const signMessage = async (message) => {
-        const sig = await signer.signMessage(message);
-        return sig;
-      };
-      const result = await authenticateWithEthWallet(account, signMessage);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+
+  const authWithEthWallet = useCallback(
+    async (connector) => {
+      setLoading(true);
+      setError(undefined);
+      setAuthMethod(undefined);
+      console.log("inside use autheticate authwithethwallet");
+
+      try {
+        const { account, connector: activeConnector } = await connectAsync(
+          connector
+        );
+        const signer = await activeConnector.getSigner();
+        console.log("signer is ",signer);
+        const signMessage = async (message) => {
+          const sig = await signer.signMessage(message);
+          return sig;
+        };
+        const result= await authenticateWithEthWallet(
+          account,
+          signMessage
+        );
+        console.log("results are ",result);
+          setAuthMethod(result);
+        console.log("auth method is ",authMethod);
+      } catch (err) {
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [connectAsync]
+  );
+
 
   return {
     authWithEthWallet,
+    authMethod,
+    loading,
+    error,
   };
 }
