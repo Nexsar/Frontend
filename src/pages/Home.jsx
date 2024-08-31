@@ -10,13 +10,14 @@ const Home = () => {
   };
   return (
     <div>
-      <div>
+      <div className="flex flex-col justify-center items-center h-screen">
         <p>What do you want to register as?</p>
-
-        <Button variant="destructive" onClick={handleDistributor}>
-          Distributor
-        </Button>
-        <Button>Worker</Button>
+        <div className="flex my-3 mx-2 gap-2">
+          <Button variant="destructive" onClick={handleDistributor}>
+            Distributor
+          </Button>
+          <Button>Worker</Button>
+        </div>
       </div>
     </div>
   );
