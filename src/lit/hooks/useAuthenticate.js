@@ -1,11 +1,10 @@
-import { useCallback, useState, useEffect } from 'react';
-import {
-  authenticateWithEthWallet,
-} from '../utils/lit';
+import { useCallback, useState} from 'react';
+import {authenticateWithEthWallet,} from '../utils/lit';
 import { useConnect } from 'wagmi';
+import { providers } from 'ethers'
 
 
-export default function useAuthenticate(redirectUri) {
+export default function useAuthenticate() {
   const [authMethod, setAuthMethod] = useState();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
@@ -15,8 +14,7 @@ export default function useAuthenticate(redirectUri) {
       setError(err );
     },
   });
-
-
+  
   const authWithEthWallet = useCallback(
     async (connector) => {
       setLoading(true);
@@ -25,22 +23,25 @@ export default function useAuthenticate(redirectUri) {
       console.log("inside use autheticate authwithethwallet");
 
       try {
-        const { account, connector: activeConnector } = await connectAsync(
+        const provider = new providers.Web3Provider(window.ethereum);
+        const [address] = await provider.listAccounts();
+        const signer = provider.getSigner(address);
+
+        const { accounts, connector: metaMask } = await connectAsync(
           connector
         );
-        const signer = await activeConnector.getSigner();
-        console.log("signer is ",signer);
+
         const signMessage = async (message) => {
           const sig = await signer.signMessage(message);
           return sig;
         };
+
         const result= await authenticateWithEthWallet(
-          account,
+          accounts[0],
           signMessage
         );
-        console.log("results are ",result);
-          setAuthMethod(result);
-        console.log("auth method is ",authMethod);
+
+        setAuthMethod(result);
       } catch (err) {
         setError(err);
       } finally {
@@ -49,8 +50,7 @@ export default function useAuthenticate(redirectUri) {
     },
     [connectAsync]
   );
-
-
+  
   return {
     authWithEthWallet,
     authMethod,

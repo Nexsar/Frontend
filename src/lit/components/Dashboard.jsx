@@ -18,9 +18,6 @@ export default function Dashboard({
 
   const { disconnectAsync } = useDisconnect();
 
-  /**
-   * Sign a message with current PKP
-   */
   async function signMessageWithPKP() {
     setLoading(true);
 
@@ -38,11 +35,9 @@ export default function Dashboard({
       const signature = await pkpWallet.signMessage(message);
       setSignature(signature);
 
-      // Get the address associated with the signature created by signing the message
       const recoveredAddr = ethers.utils.verifyMessage(message, signature);
       setRecoveredAddress(recoveredAddr);
 
-      // Check if the address associated with the signature is the same as the current PKP
       const verified =
         currentAccount.ethAddress.toLowerCase() === recoveredAddr.toLowerCase();
       setVerified(verified);

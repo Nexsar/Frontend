@@ -50,7 +50,6 @@ export default function LoginView() {
   }
 
   useEffect(() => {
-    // If user is authenticated, fetch accounts
     if (authMethod) {
       router.replace(window.location.pathname, undefined, { shallow: true });
       fetchAccounts(authMethod);

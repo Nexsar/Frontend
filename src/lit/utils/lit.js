@@ -17,7 +17,7 @@ export const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN || 'localhost';
 export const ORIGIN =
   process.env.NEXT_PUBLIC_VERCEL_ENV === 'production'
     ? `https://${DOMAIN}`
-    : `http://${DOMAIN}:3000`;
+    : `http://${DOMAIN}:5173`;
 
 export const SELECTED_LIT_NETWORK = ((process.env
   .NEXT_PUBLIC_LIT_NETWORK ) ||
@@ -38,7 +38,6 @@ export const litAuthClient = new LitAuthClient({
   litNodeClient,
 });
 
-
 export async function authenticateWithEthWallet(
   address,
   signMessage
@@ -54,7 +53,6 @@ export async function authenticateWithEthWallet(
     address,
     signMessage,
   });
-  console.log("int lit.js the authmethod is ",authMethod);
   return authMethod;
 }
 
@@ -62,9 +60,8 @@ export async function authenticateWithEthWallet(
 export async function getSessionSigs({
   pkpPublicKey,
   authMethod,
-  sessionSigsParams,
 }) {
-  console.log("in get session sign auth method is ",authMethod);
+  
   const provider = getProviderByAuthMethod(authMethod);
   if (provider) {
     await litNodeClient.connect();
@@ -103,7 +100,6 @@ export async function getPKPs(authMethod){
 
 export async function mintPKP(authMethod) {
   const provider = getProviderByAuthMethod(authMethod);
-  // Set scope of signing any data
   const options = {
     permittedAuthMethodScopes: [[AuthMethodScope.SignAnything]],
   };
@@ -120,7 +116,6 @@ export async function mintPKP(authMethod) {
     } catch (err) {
       console.warn('Minting failed, retrying...', err);
 
-      // give it a second before retrying
       await new Promise(resolve => setTimeout(resolve, 1000));
       attempts--;
     }
@@ -140,7 +135,6 @@ export async function mintPKP(authMethod) {
 }
 
 function getProviderByAuthMethod(authMethod) {
-  console.log("auth method in lit.js is ",authMethod);
   switch (authMethod.authMethodType) {
    
     case AuthMethodType.EthWallet:

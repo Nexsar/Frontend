@@ -1,14 +1,15 @@
 import { http, createConfig } from "wagmi";
-import { base, mainnet, optimism } from "wagmi/chains";
-import { injected, metaMask, safe, walletConnect } from "wagmi/connectors";
+import { mainnet, sepolia } from "wagmi/chains";
+import { metaMask } from "wagmi/connectors";
 
-const projectId = "c256f9892a3c4908bc0cd539619ff664";
+import { createWalletClient, custom } from 'viem'
 
 export const config = createConfig({
-  chains: [mainnet, base],
-  connectors: [injected(), walletConnect({ projectId }), metaMask(), safe()],
+  chains: [mainnet, sepolia],
+  connectors: [metaMask()],
   transports: {
     [mainnet.id]: http(),
-    [base.id]: http(),
+    [sepolia.id]: http(),
   },
 });
+

@@ -6,7 +6,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import WorkerDashboard from "./pages/WorkerDashboard.jsx";
 import Home from "./pages/Home.jsx";
 import DistributorDashboard from "./pages/DistributorDashboard.jsx";
-import SignUpView from "./lit/pages/index.jsx";
+import SignupWagmi from "./lit/pages/signupWagmi";
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/worker" element={<WorkerDashboard />} />
           <Route path="/distributor" element={<DistributorDashboard />} />
-          <Route path="/lit" element={<SignUpView />} />
+          <Route path="/lit" element={<SignupWagmi/>} />
         </Routes>
       </BrowserRouter>
     </div>

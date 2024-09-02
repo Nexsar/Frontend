@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import AuthMethods from './AuthMethods';
 import WalletMethods from './WalletMethods';
 
 

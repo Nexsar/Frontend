@@ -1,5 +1,7 @@
 import { useConnect } from 'wagmi';
 import { useIsMounted } from '../hooks/useIsMounted';
+import { metaMask } from "wagmi/connectors";
+
 
 
 
