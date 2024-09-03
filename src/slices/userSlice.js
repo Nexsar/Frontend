@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   is_lit_authenticated: false,
-  type: null, // "worker" or "distributor"
+  type: "distributor", // "worker" or "distributor"
   address: null,
   public_key: null,
 };

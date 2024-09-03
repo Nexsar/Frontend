@@ -5,6 +5,7 @@ import { Menubar } from "./Menubar";
 import { useSelector, useDispatch } from "react-redux";
 import * as LitJsSdk from "@lit-protocol/lit-node-client";
 import { LitNetwork } from "@lit-protocol/constants";
+import { GeneralDashboard } from "./GeneralDashboard";
 
 const DistributorDashboard = () => {
   const navigate = useNavigate();
@@ -34,8 +35,8 @@ const DistributorDashboard = () => {
   }, []);
 
   return (
-    <div>
-      <Menubar />
+    <div className="flex mt-4 h-[50vh]">
+      <GeneralDashboard />
     </div>
   );
 };

@@ -9,6 +9,7 @@ import DistributorDashboard from "./pages/DistributorDashboard.jsx";
 import SignUpView from "./lit/pages/index.jsx";
 import LandingPage from "./pages/LandingPage";
 import RegisterModal from "./pages/RegisterModal";
+import { Analytics } from "./pages/Analytics";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/distributor" element={<DistributorDashboard />} />
           <Route path="/lit" element={<SignUpView />} />
           <Route path="/register" element={<RegisterModal />} />
+          <Route path="/analytics" element={<Analytics />} />
         </Routes>
       </BrowserRouter>
     </div>
