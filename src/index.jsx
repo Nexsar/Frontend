@@ -9,16 +9,25 @@ import { WagmiProvider } from "wagmi";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { config } from "./config";
 
+import { store } from "./store/store.js";
+import { Provider } from "react-redux";
+
+import { ChakraProvider } from "@chakra-ui/react";
+
 const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <WagmiProvider config={config}>
-      <QueryClientProvider client={queryClient}>
-        <App />
-      </QueryClientProvider>
-    </WagmiProvider>
+    <ChakraProvider>
+      <Provider store={store}>
+        <WagmiProvider config={config}>
+          <QueryClientProvider client={queryClient}>
+            <App />
+          </QueryClientProvider>
+        </WagmiProvider>
+      </Provider>
+    </ChakraProvider>
   </React.StrictMode>,
 );
 
