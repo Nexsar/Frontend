@@ -10,6 +10,9 @@ import SignUpView from "./lit/pages/index.jsx";
 import LandingPage from "./pages/LandingPage";
 import RegisterModal from "./pages/RegisterModal";
 import { Analytics } from "./pages/Analytics";
+import Encrypt from "./lit/components/encryptionDistributorData";
+// import GenerateWrappedKey from "./lit/components/wrappedkey";
+import SignupWagmi from "./lit/pages/signupWagmi";
 
 function App() {
   return (
@@ -23,6 +26,8 @@ function App() {
           <Route path="/lit" element={<SignUpView />} />
           <Route path="/register" element={<RegisterModal />} />
           <Route path="/analytics" element={<Analytics />} />
+          <Route path="/lit" element={<SignupWagmi />} />
+          <Route path="/sign" element={<Encrypt />} />
         </Routes>
       </BrowserRouter>
     </div>
