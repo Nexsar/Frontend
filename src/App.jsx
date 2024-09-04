@@ -26,7 +26,7 @@ function App() {
           <Route path="/lit" element={<SignUpView />} />
           <Route path="/register" element={<RegisterModal />} />
           <Route path="/analytics" element={<Analytics />} />
-          <Route path="/lit" element={<SignupWagmi />} />
+          <Route path="/lit-sign" element={<SignupWagmi />} />
           <Route path="/sign" element={<Encrypt />} />
         </Routes>
       </BrowserRouter>
