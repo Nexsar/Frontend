@@ -44,6 +44,7 @@ export default function useAuthenticate(redirectUri) {
         console.log("results are ", result);
         setAuthMethod(result);
         console.log("auth method is ", authMethod);
+        localStorage.setItem("AuthMethod", result);
       } catch (err) {
         setError(err);
       } finally {

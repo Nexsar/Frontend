@@ -11,7 +11,7 @@ import {
 import {
   LitAbility,
 } from '@lit-protocol/types';
-import { LitPKPResource } from '@lit-protocol/auth-helpers';
+import { LitPKPResource, LitActionResource, LitAccessControlConditionResource } from '@lit-protocol/auth-helpers';
 
 export const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN || 'localhost';
 export const ORIGIN =
@@ -20,12 +20,12 @@ export const ORIGIN =
     : `http://${DOMAIN}:3000`;
 
 export const SELECTED_LIT_NETWORK = ((process.env
-  .NEXT_PUBLIC_LIT_NETWORK ) ||
+  .NEXT_PUBLIC_LIT_NETWORK) ||
   LIT_NETWORK.DatilDev);
 
 export const litNodeClient = new LitNodeClient({
   alertWhenUnauthorized: false,
-  litNetwork:   SELECTED_LIT_NETWORK,
+  litNetwork: SELECTED_LIT_NETWORK,
   debug: true,
 });
 
@@ -42,7 +42,7 @@ export const litAuthClient = new LitAuthClient({
 export async function authenticateWithEthWallet(
   address,
   signMessage
-){
+) {
   const ethWalletProvider = litAuthClient.initProvider(
     ProviderType.EthWallet,
     {
@@ -54,7 +54,7 @@ export async function authenticateWithEthWallet(
     address,
     signMessage,
   });
-  console.log("int lit.js the authmethod is ",authMethod);
+  console.log("int lit.js the authmethod is ", authMethod);
   return authMethod;
 }
 
@@ -64,7 +64,7 @@ export async function getSessionSigs({
   authMethod,
   sessionSigsParams,
 }) {
-  console.log("in get session sign auth method is ",authMethod);
+  console.log("in get session sign auth method is ", authMethod);
   const provider = getProviderByAuthMethod(authMethod);
   if (provider) {
     await litNodeClient.connect();
@@ -76,6 +76,15 @@ export async function getSessionSigs({
           resource: new LitPKPResource('*'),
           ability: LitAbility.PKPSigning,
         },
+        {
+          resource: new LitActionResource("*"),
+          ability: LitAbility.LitActionExecution,
+        },
+        {
+          resource: new LitAccessControlConditionResource('*'),
+          ability: LitAbility.AccessControlConditionDecryption,
+
+        }
       ],
     });
 
@@ -95,7 +104,7 @@ export async function updateSessionSigs(
 }
 
 
-export async function getPKPs(authMethod){
+export async function getPKPs(authMethod) {
   const provider = getProviderByAuthMethod(authMethod);
   const allPKPs = await provider.fetchPKPsThroughRelayer(authMethod);
   return allPKPs;
@@ -140,12 +149,12 @@ export async function mintPKP(authMethod) {
 }
 
 function getProviderByAuthMethod(authMethod) {
-  console.log("auth method in lit.js is ",authMethod);
+  console.log("auth method in lit.js is ", authMethod);
   switch (authMethod.authMethodType) {
-   
+
     case AuthMethodType.EthWallet:
       return litAuthClient.getProvider(ProviderType.EthWallet);
-   
+
     default:
       return;
   }

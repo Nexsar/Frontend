@@ -14,7 +14,7 @@ export default function useSession() {
    * Generate session sigs and store new session data
    */
   const initSession = useCallback(
-    async (authMethod, pkp)=> {
+    async (authMethod, pkp) => {
       setLoading(true);
       setError(undefined);
       try {
@@ -29,6 +29,9 @@ export default function useSession() {
         const expiration = new Date(
           Date.now() + 1000 * 60 * 60 * 24 * 7
         ).toISOString(); // 1 week
+
+        localStorage.setItem("pkp", JSON.stringify(pkp));
+        localStorage.setItem("authMethod", JSON.stringify(authMethod));
 
         // Generate session sigs
         const sessionSigs = await getSessionSigs({
