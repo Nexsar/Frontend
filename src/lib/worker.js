@@ -1,4 +1,4 @@
-import { Contract, BrowserProvider } from "ethers";
+import { ethers } from "ethers";
 import workersJson from '../contract/Workers.json';
 
 const contractAddress = "0xc8E520399066803f96D2566C208aCb1AC94fAd4F";
@@ -9,9 +9,9 @@ const getContract = async () => {
     if (typeof window.ethereum !== 'undefined') {
         // Request account access
         await window.ethereum.request({ method: 'eth_requestAccounts' });
-        const provider = new BrowserProvider(window.ethereum);  // Updated to BrowserProvider
-        const signer = await provider.getSigner();  // 'getSigner()' is now async
-        return new Contract(contractAddress, contractABI, signer);
+        const provider = new ethers.providers.Web3Provider(window.ethereum);  // Updated to Web3Provider
+        const signer = provider.getSigner();  // getSigner() is synchronous in ethers v5
+        return new ethers.Contract(contractAddress, contractABI, signer);
     } else {
         throw new Error("Ethereum object not found, install MetaMask.");
     }
