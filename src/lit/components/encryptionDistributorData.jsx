@@ -15,6 +15,7 @@ const Encrypt = () => {
                 const provider = new ethers.providers.Web3Provider(window.ethereum);
                 await provider.send("eth_requestAccounts", []);
                 const ethersSigner = provider.getSigner();
+                console.log(ethersSigner);
 
                 const chain = 'ethereum';
                 const pkp = JSON.parse(localStorage.getItem('lit-wallet-sig'));
