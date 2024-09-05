@@ -62,11 +62,6 @@ const Broadcast = () => {
             toSign,
           });
         },
-
-
-
-
-
       });
       console.log("Got Session Signatures! ", sessionSigs);
 
