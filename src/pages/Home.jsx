@@ -6,7 +6,13 @@ const Home = () => {
   const navigate = useNavigate();
 
   const handleDistributor = () => {
+    //TODO: open a pop up-> take his details -> create a distributor first and then route
     navigate("/distributor");
+  };
+
+  const handleWorker = () => {
+    //TODO: create a worker first
+    navigate("/worker");
   };
   return (
     <div>
@@ -16,7 +22,7 @@ const Home = () => {
           <Button variant="destructive" onClick={handleDistributor}>
             Distributor
           </Button>
-          <Button>Worker</Button>
+          <Button onClick={handleWorker}>Worker</Button>
         </div>
       </div>
     </div>
