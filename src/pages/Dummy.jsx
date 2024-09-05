@@ -11,14 +11,19 @@ const Dummy = () => {
         console.log("here...");
         await window.ethereum.request({ method: "eth_requestAccounts" });
 
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const signer = provider.getSigner();
+        // const provider = new ethers.providers.Web3Provider(window.ethereum);
+        // const signer = provider.getSigner();
+        const provider = new ethers.providers.JsonRpcProvider("https://devnet.galadriel.com");
+        // const signer = provider.getSigner();
+        const signer = new ethers.Wallet("PRIVATE_KEY", provider);
+        console.log("Signer (galadriel)", signer);
 
-        console.log(signer);
         const url = "http://localhost:8000/dummy";
+        console.log("url done");
         const data = {
           signer,
         };
+        console.log("Data", data);
         fetch(url, {
           method: "POST", // HTTP method
           headers: {
@@ -29,6 +34,7 @@ const Dummy = () => {
         })
           .then((response) => {
             if (!response.ok) {
+              console.log("HTTP Error!!!")
               throw new Error(`HTTP error! status: ${response.status}`);
             }
             return response.json(); // Parse JSON response

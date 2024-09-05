@@ -14,6 +14,7 @@ import Encrypt from "./lit/components/encryptionDistributorData";
 // import GenerateWrappedKey from "./lit/components/wrappedkey";
 import SignupWagmi from "./lit/pages/signupWagmi";
 import Dummy from "./pages/Dummy";
+import DalleInteraction from "./components/ui/DalleInteraction.jsx";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/lit-sign" element={<SignupWagmi />} />
           <Route path="/sign" element={<Encrypt />} />
           <Route path="/dummy" element={<Dummy />} />
+          <Route path="/dalle" element={<DalleInteraction />} />
         </Routes>
       </BrowserRouter>
     </div>
