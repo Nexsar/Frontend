@@ -17,10 +17,14 @@ import {
   getAllWorkersRewards,
 } from "../lib/worker.js";
 
+import { Alert, AlertDescription, AlertTitle } from "../components/ui/alert";
+import { Terminal } from "lucide-react";
+
 import * as Distributor from "../lib/distributor.js";
 import AnimatedOption from "./AnimatedOption.jsx";
 import OptionGrid from "./OptionGrid.jsx";
 import { Heart } from "lucide-react";
+import PostHeading from "./PostHeading.jsx";
 
 //fetch from postgres
 
@@ -133,18 +137,28 @@ const WorkerFeed = () => {
   };
 
   return (
-    <ScrollArea className="h-screen w-full bg-black text-white rounded-md border">
-      <div className="p-4">
-        <h4 className="mb-4 text-sm font-medium leading-none">Posts</h4>
+    <ScrollArea className="h-screen w-full rounded-md border">
+      <div className="p-4 w-full h-full">
+        <PostHeading />
         {posts &&
           posts.map((post) => (
             <>
               <div key={post.id} className="text-sm">
-                <div className="w-[75vw] h-[45vh] bg-black">
-                  <h1>
-                    this is a descriptionis a descriptiois a descriptiois a
-                    descriptio
-                  </h1>
+                <div className="w-[75vw] h-[55vh]">
+                  <Alert className="text-xl">
+                    <Terminal className="h-4 w-4" />
+                    <div className="flex gap-3 justify-between items-center px-4">
+                      <AlertTitle>Somyajeet</AlertTitle>
+                      <AlertDescription>
+                        <h1>
+                          {post.content.substr(
+                            0,
+                            Math.min(post.content.length, 100),
+                          ) + "..."}
+                        </h1>
+                      </AlertDescription>
+                    </div>
+                  </Alert>
                   <div className="flex gap-2 justify-between px-10 py-3 items-center">
                     {post.options.map((option) => {
                       return (
