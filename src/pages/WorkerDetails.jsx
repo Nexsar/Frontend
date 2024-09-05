@@ -12,6 +12,7 @@ const WorkerDetails = () => {
         <AlertTitle>Worker_Name</AlertTitle>
         <AlertDescription>Somyajeet Gupta Chowdhury</AlertDescription>
       </Alert>
+
       <Alert className="text-xl">
         <Terminal className="h-4 w-4" />
         <AlertTitle>Public_Key</AlertTitle>

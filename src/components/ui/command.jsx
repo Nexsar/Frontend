@@ -69,7 +69,7 @@ const CommandGroup = React.forwardRef(({ className, ...props }, ref) => (
   <CommandPrimitive.Group
     ref={ref}
     className={cn(
-      "overflow-hidden p-1 text-slate-950 [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-slate-500 dark:text-slate-50 dark:[&_[cmdk-group-heading]]:text-slate-400",
+      "overflow-hidden p-1 text-slate-950 [&_[cmdk-group-heading]]:px-2  [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-slate-500 dark:text-slate-50 dark:[&_[cmdk-group-heading]]:text-slate-400",
       className,
     )}
     {...props}
@@ -91,7 +91,7 @@ const CommandItem = React.forwardRef(({ className, ...props }, ref) => (
   <CommandPrimitive.Item
     ref={ref}
     className={cn(
-      "relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none data-[disabled=true]:pointer-events-none data-[selected='true']:bg-slate-100 data-[selected=true]:text-slate-900 data-[disabled=true]:opacity-50 dark:data-[selected='true']:bg-slate-800 dark:data-[selected=true]:text-slate-50",
+      "relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none data-[disabled=true]:pointer-events-none   data-[disabled=true]:opacity-50  hover:bg-gray-500 hover:text-black",
       className,
     )}
     {...props}

@@ -4,9 +4,20 @@ import { Boxes } from "../components/ui/background-boxes";
 import { cn } from "../lib/utils";
 import { useNavigate } from "react-router-dom";
 import { CardSpotlight } from "../components/ui/card-spotlight";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const InteractiveHome = () => {
   const navigate = useNavigate();
+
+  const user = useSelector((state) => state.user);
+  console.log({ user });
+
+  useEffect(() => {
+    if (!user.is_lit_authenticated) {
+      navigate("/lit");
+    }
+  }, []);
 
   const handleDistributor = () => {
     //TODO: open a pop up-> take his details -> create a distributor first and then route
