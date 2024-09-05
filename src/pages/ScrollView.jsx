@@ -15,7 +15,7 @@ import {
   getRewards,
   getVotedOption,
   getAllWorkersRewards,
-} from "../lib/worker.js"
+} from "../lib/worker.js";
 
 import * as Distributor from "../lib/distributor.js";
 
@@ -33,10 +33,10 @@ export function ScrollView() {
       // let data = await fetch(be_url, {
       //   method: "GET",
       // });
-      let data = [] // List of all Posts....
+      let data = []; // List of all Posts....
       for (let index = 0; index < allAddresses.length; index++) {
         const distributorAddress = allAddresses[index];
-        let post = await Distributor.getAllPosts(distributorAddress)
+        let post = await Distributor.getAllPosts(distributorAddress);
         data.push(post);
       }
       // data = await data.json();
@@ -48,12 +48,12 @@ export function ScrollView() {
   }, [posts]);
 
   const handleVotes = async (postId) => {
-    return await Distributor.getTotalVotesOnPost(postId)
-  }
+    return await Distributor.getTotalVotesOnPost(postId);
+  };
 
   const handleOptions = async (postId) => {
-    return await Distributor.getAllOptions(postId)
-  }
+    return await Distributor.getAllOptions(postId);
+  };
 
   return (
     <ScrollArea className="h-screen w-full rounded-md border">
@@ -63,7 +63,7 @@ export function ScrollView() {
           posts.map((post) => (
             <>
               <div key={post.id} className="text-sm">
-                <div className="w-30 h-[45vh] border-2 bg-blue-300">
+                <div className="w-30 h-[45vh] border-2 bg-black">
                   {post.content}
                   <div className="flex gap-2">
                     {/* <img
@@ -79,7 +79,7 @@ export function ScrollView() {
                           {/* IS THIS CORRECT- RED FLAG */}
                           {option}
                         </div>
-                      )
+                      );
                     })}
                   </div>
                 </div>

@@ -10,16 +10,18 @@ import {
   IconTableColumn,
 } from "@tabler/icons-react";
 
-const OptionGrid = (option) => {
+const OptionGrid = ({ option }) => {
+  console.log({ option });
   return (
-    <BentoGrid className="max-w-4xl mx-auto">
+    <BentoGrid className="w-[60vw] h-[full] mx-auto">
       {items.map((item, i) => (
         <BentoGridItem
           key={i}
-          title={item.title}
-          description={item.description}
-          header={item.header}
-          icon={item.icon}
+          header={
+            <div className="w-[250px] h-[60px]">
+              <img src={option.image_url} alt="wot" />
+            </div>
+          }
           className={i === 3 || i === 6 ? "md:col-span-2" : ""}
         />
       ))}

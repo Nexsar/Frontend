@@ -20,6 +20,7 @@ import {
 import * as Distributor from "../lib/distributor.js";
 import AnimatedOption from "./AnimatedOption.jsx";
 import OptionGrid from "./OptionGrid.jsx";
+import { Heart } from "lucide-react";
 
 //fetch from postgres
 
@@ -132,15 +133,19 @@ const WorkerFeed = () => {
   };
 
   return (
-    <ScrollArea className="h-screen w-full rounded-md border">
+    <ScrollArea className="h-screen w-full bg-black text-white rounded-md border">
       <div className="p-4">
         <h4 className="mb-4 text-sm font-medium leading-none">Posts</h4>
         {posts &&
           posts.map((post) => (
             <>
               <div key={post.id} className="text-sm">
-                <div className="w-[75vw] h-[45vh] border-2 bg-blue-300">
-                  <div className="flex h-full w-full gap-2 justify-center items-center">
+                <div className="w-[75vw] h-[45vh] bg-black">
+                  <h1>
+                    this is a descriptionis a descriptiois a descriptiois a
+                    descriptio
+                  </h1>
+                  <div className="flex gap-2 justify-between px-10 py-3 items-center">
                     {post.options.map((option) => {
                       return (
                         <div
@@ -149,16 +154,21 @@ const WorkerFeed = () => {
                           onClick={() => handleSelected(post.id, option.id)}
                         >
                           <OptionGrid option={option} />
-                          <AnimatedOption
-                            post_title={post.content}
-                            image_url={option.image_url}
-                          />
+                          <div className="flex justify-between px-4 items-center">
+                            <AnimatedOption
+                              post_title={post.content}
+                              image_url={option.image_url}
+                            />
+                            {selectedOption === option.id && (
+                              <Heart fill="red" />
+                            )}
+                          </div>
                         </div>
                       );
                     })}
                   </div>
                 </div>
-                <div className="flex items-center justify-between px-4 py-3">
+                <div className="flex items-center justify-center px-4 py-3">
                   <Button
                     variant="destructive"
                     onClick={() => handleVote(post.id)}

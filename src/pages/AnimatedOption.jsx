@@ -12,11 +12,11 @@ import { Terminal } from "lucide-react";
 const AnimatedOption = ({ option_id, setOptionId, image_url, post_title }) => {
   const images = [image_url];
   return (
-    <div className="py-40  flex items-center justify-center">
+    <div className="py-2  flex items-center justify-center">
       <Modal>
         <ModalTrigger className="bg-black dark:bg-white dark:text-black text-white flex justify-center group/modal-btn">
           <span className="group-hover/modal-btn:translate-x-40 text-center transition duration-500">
-            See Image
+            View
           </span>
           <div className="-translate-x-40 group-hover/modal-btn:translate-x-0 flex items-center justify-center absolute inset-0 transition duration-500 text-white z-20">
             <Terminal className="w-4 h-4" />
@@ -97,17 +97,6 @@ const AnimatedOption = ({ option_id, setOptionId, image_url, post_title }) => {
               </div>
             </div>
           </ModalContent>
-          <ModalFooter className="gap-4">
-            <button className="px-2 py-1 bg-gray-200 text-black dark:bg-black dark:border-black dark:text-white border border-gray-300 rounded-md text-sm w-28">
-              Close
-            </button>
-            <button
-              onClick={() => setOptionId(option_id)}
-              className="bg-black text-white dark:bg-white dark:text-black text-sm px-2 py-1 rounded-md border border-black w-28"
-            >
-              Choose to vote
-            </button>
-          </ModalFooter>
         </ModalBody>
       </Modal>
     </div>
