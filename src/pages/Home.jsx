@@ -1,9 +1,16 @@
 import React from "react";
 import { Button } from "../components/ui/Button";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Home = () => {
   const navigate = useNavigate();
+
+  const user = useSelector((state) => state.user);
+
+  if (!user.is_lit_authenticated) {
+    navigate("/register");
+  }
 
   const handleDistributor = () => {
     //TODO: open a pop up-> take his details -> create a distributor first and then route
