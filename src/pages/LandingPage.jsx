@@ -4,6 +4,7 @@ import { GeminiEffect } from "./GeminiEffect";
 import { Navbar } from "./Navbar";
 import { Button } from "../components/ui/Button";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -11,6 +12,10 @@ const LandingPage = () => {
   const handleReg = () => {
     navigate("/lit");
   };
+
+  useEffect(() => {
+    console.log("reached here...");
+  }, []);
   return (
     <>
       {/* TODO: hardcoded postion, fix later */}
