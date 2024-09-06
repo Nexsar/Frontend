@@ -16,6 +16,7 @@ import SignupWagmi from "./lit/pages/signupWagmi";
 import Dummy from "./pages/Dummy";
 import DalleInteraction from "./components/ui/DalleInteraction.jsx";
 import InteractiveHome from "./pages/InteractiveHome";
+import Broadcast from './lit/components/broadcast';
 
 function App() {
   return (
@@ -40,3 +41,4 @@ function App() {
 }
 
 export default App;
+
