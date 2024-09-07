@@ -17,11 +17,15 @@ import {
   CommandList,
 } from "../../components/ui/command";
 
+
 const WalletMethods = ({ authWithEthWallet, setView }) => {
   const isMounted = useIsMounted();
   const { connectors } = useConnect();
 
+
   if (!isMounted) return null;
+  console.log("connectors from wallet dashboard is ",connectors);
+  const filteredConnectors = connectors.filter(connector => connector.id === "metaMaskSDK");
 
   return (
     <>
@@ -37,9 +41,11 @@ const WalletMethods = ({ authWithEthWallet, setView }) => {
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup heading="Suggestions" className="h-[75vh]">
-            {connectors.map((connector) => {
+            {filteredConnectors.map((connector) => {
               const appearance = get_color_for_wallet + " text-white";
+              console.log("connector from map is ",connector);
               const img_src = get_image_src_for_wallet(
+              
                 connector.name.toLowerCase(),
               );
               return (
@@ -52,9 +58,6 @@ const WalletMethods = ({ authWithEthWallet, setView }) => {
                     onClick={() => authWithEthWallet({ connector })}
                   >
                     {connector.name.toLowerCase() === "metamask" && (
-                      <div className="btn__icon"></div>
-                    )}
-                    {connector.name.toLowerCase() === "coinbase wallet" && (
                       <div className="btn__icon"></div>
                     )}
                     <span className="btn__label w-[300px]">

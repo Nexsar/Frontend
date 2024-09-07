@@ -17,13 +17,15 @@ export default function SignUpView() {
     authWithEthWallet,
     loading: authLoading,
     error: authError,
-  } = useAuthenticate(redirectUri);
+  } = useAuthenticate();
+
   const {
     createAccount,
     currentAccount,
     loading: accountsLoading,
     error: accountsError,
   } = useAccounts();
+
   const {
     initSession,
     sessionSigs,
@@ -38,26 +40,32 @@ export default function SignUpView() {
       console.error('Auth error:', authError);
     }
 
-    if (accountsError) {
+  if (accountsError) {
       console.error('Accounts error:', accountsError);
     }
 
-    if (sessionError) {
+  if (sessionError) {
       console.error('Session error:', sessionError);
     }
   }
 
   useEffect(() => {
     if (authMethod != undefined) {
+      console.log("creation of account called");
       createAccount(authMethod);
+     
+
     }
   }, [createAccount, authMethod]);
 
   useEffect(() => {
     if (authMethod && currentAccount) {
+      console.log("session key is initialised")
       initSession(authMethod, currentAccount);
     }
   }, [authMethod, currentAccount, initSession]);
+
+ 
 
 
   if (authLoading) {

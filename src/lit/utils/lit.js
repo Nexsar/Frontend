@@ -25,7 +25,7 @@ export const SELECTED_LIT_NETWORK = ((process.env
 
 export const litNodeClient = new LitNodeClient({
   alertWhenUnauthorized: false,
-  litNetwork: SELECTED_LIT_NETWORK,
+  litNetwork: 'datil-dev',
   debug: true,
 });
 
@@ -33,11 +33,14 @@ litNodeClient.connect();
 
 export const litAuthClient = new LitAuthClient({
   litRelayConfig: {
-    relayApiKey: 'test-api-key',
+    relayApiKey: '6ts099ns-xy2h-kk7b-s2ve-ih5tf1wddk80_septo',
   },
   litNodeClient,
 });
 
+export async function getProviderByAuth(authMethod){
+  return await getProviderByAuthMethod(authMethod);
+}
 
 export async function authenticateWithEthWallet(
   address,
@@ -59,12 +62,10 @@ export async function authenticateWithEthWallet(
 }
 
 
-export async function getSessionSigs({
+export async function getSessionSigsForDistributor({
   pkpPublicKey,
   authMethod,
-  sessionSigsParams,
 }) {
-  console.log("in get session sign auth method is ", authMethod);
   const provider = getProviderByAuthMethod(authMethod);
   if (provider) {
     await litNodeClient.connect();
@@ -112,7 +113,7 @@ export async function getPKPs(authMethod) {
 
 export async function mintPKP(authMethod) {
   const provider = getProviderByAuthMethod(authMethod);
-  // Set scope of signing any data
+
   const options = {
     permittedAuthMethodScopes: [[AuthMethodScope.SignAnything]],
   };
@@ -129,7 +130,6 @@ export async function mintPKP(authMethod) {
     } catch (err) {
       console.warn('Minting failed, retrying...', err);
 
-      // give it a second before retrying
       await new Promise(resolve => setTimeout(resolve, 1000));
       attempts--;
     }
@@ -153,6 +153,7 @@ function getProviderByAuthMethod(authMethod) {
   switch (authMethod.authMethodType) {
 
     case AuthMethodType.EthWallet:
+      console.log("provider is ",litAuthClient.getProvider(ProviderType.EthWallet));
       return litAuthClient.getProvider(ProviderType.EthWallet);
 
     default:
