@@ -10,16 +10,9 @@ try {
 export const fetchCode = `
 (async (resp) => {
       console.log("Fetch response: ", resp.post.done);
-
-
   // this requests a signature share from the Lit Node
   // the signature share will be automatically returned in the HTTP response from the node
   // all the params (toSign, publicKey, sigName) are passed in from the LitJsSdk.executeJs() function
-  try{
   const sigShare = await LitActions.signEcdsa({ toSign, publicKey, sigName });
-
-  }catch(err){
-  console.log("error in lit", err);
-  }
 })();
 `;

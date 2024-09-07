@@ -32,8 +32,6 @@ function App() {
           <Route path="/analytics" element={<Analytics />} />
           <Route path="/lit-sign" element={<SignupWagmi />} />
           <Route path="/sign" element={<Encrypt />} />
-          <Route path="/dummy" element={<Dummy />} />
-          <Route path="/dalle" element={<DalleInteraction />} />
         </Routes>
       </BrowserRouter>
     </div>

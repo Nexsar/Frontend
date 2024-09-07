@@ -17,7 +17,7 @@ import {
   getAllWorkersRewards,
 } from "../lib/worker.js";
 
-import * as Distributor from "../lib/distributor.js";
+
 
 //fetch from postgres
 

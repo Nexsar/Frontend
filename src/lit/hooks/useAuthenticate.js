@@ -3,7 +3,6 @@ import { authenticateWithEthWallet, } from '../utils/lit';
 import { useConnect } from 'wagmi';
 import { providers } from 'ethers'
 
-
 export default function useAuthenticate() {
   const [authMethod, setAuthMethod] = useState();
   const [loading, setLoading] = useState(false);
@@ -14,6 +13,7 @@ export default function useAuthenticate() {
       setError(err);
     },
   });
+  console.log("connectAsync ",connectAsync);
 
   const authWithEthWallet = useCallback(
     async (connector) => {
@@ -40,10 +40,11 @@ export default function useAuthenticate() {
           accounts[0],
           signMessage
         );
+        console.log("auth method is",authMethod);
 
         setAuthMethod(result);
         console.log("result is", result);
-        localStorage.setItem("AuthMethod", result);
+        localStorage.setItem("AuthMethod", JSON.parse(result));
       } catch (err) {
         setError(err);
       } finally {

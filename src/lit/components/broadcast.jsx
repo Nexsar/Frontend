@@ -65,7 +65,6 @@ const Broadcast = () => {
       });
       console.log("Got Session Signatures! ", sessionSigs);
 
-
       // Create message to sign
       const message = new Uint8Array(
         await crypto.subtle.digest(

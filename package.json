@@ -60,7 +60,8 @@
     "wagmi": "^2.12.7",
     "web-vitals": "^2.1.4",
     "web3modal": "^1.9.12",
-    "zustand": "^4.5.5"
+    "zustand": "^4.5.5",
+    "permissionless": "^0.2.0"
   },
   "scripts": {
     "start": "vite",

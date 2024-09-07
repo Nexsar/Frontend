@@ -21,11 +21,15 @@ import { Boxes } from "../../components/ui/background-boxes";
 import { Alert, AlertDescription, AlertTitle } from "../../components/ui/alert";
 import { Terminal } from "lucide-react";
 
+
 const WalletMethods = ({ authWithEthWallet, setView }) => {
   const isMounted = useIsMounted();
   const { connectors } = useConnect();
 
+
   if (!isMounted) return null;
+  console.log("connectors from wallet dashboard is ",connectors);
+  const filteredConnectors = connectors.filter(connector => connector.id === "metaMaskSDK");
 
   return (
     <>
@@ -48,39 +52,36 @@ const WalletMethods = ({ authWithEthWallet, setView }) => {
             <CommandList>
               <CommandEmpty>No results found.</CommandEmpty>
               <CommandGroup className="h-full overflow-y-scroll">
-                {connectors.map((connector) => {
-                  const appearance = get_color_for_wallet + " text-white";
-                  const img_src = get_image_src_for_wallet(
-                    connector.name.toLowerCase(),
-                  );
-                  return (
-                    <CommandItem className="h-[10vh] flex justify-between py-3 text-white">
-                      <SymbolIcon className="mr-2 h-4 w-4" />
-                      <Button
-                        variant="secondary"
-                        disabled={connector.ready}
-                        key={connector.id}
-                        onClick={() => authWithEthWallet({ connector })}
-                      >
-                        {connector.name.toLowerCase() === "metamask" && (
-                          <div className="btn__icon"></div>
-                        )}
-                        {connector.name.toLowerCase() === "coinbase wallet" && (
-                          <div className="btn__icon"></div>
-                        )}
-                        <span className="btn__label w-[300px]">
-                          {connector.name}
-                        </span>
-                      </Button>
-                      <img src={img_src} className="w-[40px] rounded-3xl" />
-                    </CommandItem>
-                  );
-                })}
-              </CommandGroup>
-            </CommandList>
-          </Command>
-        </div>
-      </div>
+            {filteredConnectors.map((connector) => {
+              const appearance = get_color_for_wallet + " text-white";
+              console.log("connector from map is ",connector);
+              const img_src = get_image_src_for_wallet(
+              
+                connector.name.toLowerCase(),
+              );
+              return (
+                <CommandItem className="h-[10vh] flex">
+                  <SymbolIcon className="mr-2 h-4 w-4" />
+                  <Button
+                    variant="secondary"
+                    disabled={connector.ready}
+                    key={connector.id}
+                    onClick={() => authWithEthWallet({ connector })}
+                  >
+                    {connector.name.toLowerCase() === "metamask" && (
+                      <div className="btn__icon"></div>
+                    )}
+                    <span className="btn__label w-[300px]">
+                      Continue with {connector.name}
+                    </span>
+                  </Button>
+                  <img src={img_src} className="w-[40px]" />
+                </CommandItem>
+              );
+            })}
+          </CommandGroup>
+        </CommandList>
+      </Command>
     </>
   );
 };
