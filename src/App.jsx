@@ -15,6 +15,7 @@ import Encrypt from "./lit/components/encryptionDistributorData";
 import SignupWagmi from "./lit/pages/signupWagmi";
 import Dummy from "./pages/Dummy";
 import DalleInteraction from "./components/ui/DalleInteraction.jsx";
+import InteractiveHome from "./pages/InteractiveHome";
 import Broadcast from './lit/components/broadcast';
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/home" element={<Home />} />
+          <Route path="/home" element={<InteractiveHome />} />
           <Route path="/worker" element={<WorkerDashboard />} />
           <Route path="/distributor" element={<DistributorDashboard />} />
           <Route path="/lit" element={<SignUpView />} />

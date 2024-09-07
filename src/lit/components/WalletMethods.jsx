@@ -16,6 +16,10 @@ import {
   CommandItem,
   CommandList,
 } from "../../components/ui/command";
+import { CardSpotlight } from "../../components/ui/card-spotlight";
+import { Boxes } from "../../components/ui/background-boxes";
+import { Alert, AlertDescription, AlertTitle } from "../../components/ui/alert";
+import { Terminal } from "lucide-react";
 
 
 const WalletMethods = ({ authWithEthWallet, setView }) => {
@@ -29,18 +33,25 @@ const WalletMethods = ({ authWithEthWallet, setView }) => {
 
   return (
     <>
-      <div className="h-[12vh] py-3 mt-2">
-        <h1 className="text-xl">Connect your web3 wallet</h1>
-        <b>
-          Connect your wallet then sign a message to verify you&apos;re the
-          owner of the address.
-        </b>
-      </div>
-      <Command className="rounded-lg mt-4 border mx-auto shadow-md w-[50vw]">
-        <CommandInput placeholder="Type a command or search..." />
-        <CommandList>
-          <CommandEmpty>No results found.</CommandEmpty>
-          <CommandGroup heading="Suggestions" className="h-[75vh]">
+      <div className="mx-auto h-screen relative w-screen overflow-hidden bg-black flex flex-col items-center justify-center rounded-lg">
+        <div className="absolute inset-0 w-full h-full bg-slate-900 z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none" />
+        <Boxes />
+        <div className="z-20 flex flex-col my-3 mx-2 gap-2">
+          <div className="h-[12vh] text-white py-3 mt-2">
+            <Alert className="text-xl color-white bg-gray-500 text-black border-0">
+              <Terminal className="h-10 w-10" />
+              <AlertTitle>Connect your web3 wallet</AlertTitle>
+              <AlertDescription>
+                And sign a message to verify you&apos;re the owner of the
+                address.
+              </AlertDescription>
+            </Alert>
+          </div>
+          <Command className="bg-black text-white color-white z-40 rounded-lg mt-4 border-0 mx-auto shadow-md w-[40vw]">
+            <CommandInput placeholder="Type a command or search..." />
+            <CommandList>
+              <CommandEmpty>No results found.</CommandEmpty>
+              <CommandGroup className="h-full overflow-y-scroll">
             {filteredConnectors.map((connector) => {
               const appearance = get_color_for_wallet + " text-white";
               console.log("connector from map is ",connector);

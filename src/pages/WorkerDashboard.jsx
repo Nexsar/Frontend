@@ -20,11 +20,11 @@ const WorkerDashboard = () => {
   }, []);
 
   return (
-    <div className="flex gap-3">
+    <div className="flex gap-3 justify-center">
       <div className="w-[75vw]">
         <WorkerFeed />
       </div>
-      <div className="right-0 w-[15vw] h-screen sticky">
+      <div className="right-0 w-[20vw] h-screen sticky">
         <WorkerDetails />
       </div>
     </div>

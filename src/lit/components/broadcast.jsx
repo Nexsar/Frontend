@@ -38,38 +38,32 @@ const Broadcast = () => {
         chain: 'ethereum',
         expiration: new Date(Date.now() + 1000 * 60 * 60 * 24).toISOString(),
         resourceAbilityRequests: [
-            {
-                resource: new LitActionResource("*"),
-                ability: LitAbility.LitActionExecution,
-              },
-              {
-                resource: new LitPKPResource("*"),
-                ability: LitAbility.PKPSigning,
-              },
+          {
+            resource: new LitActionResource("*"),
+            ability: LitAbility.LitActionExecution,
+          },
+          {
+            resource: new LitPKPResource("*"),
+            ability: LitAbility.PKPSigning,
+          },
         ],
         authNeededCallback: async ({ resourceAbilityRequests, expiration, uri }) => {
-            const toSign = await createSiweMessageWithRecaps({
-                uri: uri,
-                expiration: expiration,
-                resources: resourceAbilityRequests,
-                walletAddress: await ethersSigner.getAddress(),
-                nonce: await litNodeClient.getLatestBlockhash(),
-                litNodeClient,
-            });
+          const toSign = await createSiweMessageWithRecaps({
+            uri: uri,
+            expiration: expiration,
+            resources: resourceAbilityRequests,
+            walletAddress: await ethersSigner.getAddress(),
+            nonce: await litNodeClient.getLatestBlockhash(),
+            litNodeClient,
+          });
 
-            return await generateAuthSig({
-                signer: ethersSigner,
-                toSign,
-            });
+          return await generateAuthSig({
+            signer: ethersSigner,
+            toSign,
+          });
         },
-        
-       
-
-
-
-    });
-      console.log("Got Session Signatures! ",sessionSigs);
-     
+      });
+      console.log("Got Session Signatures! ", sessionSigs);
 
       // Create message to sign
       const message = new Uint8Array(

@@ -1,27 +1,24 @@
-import { useState } from 'react';
-import WalletMethods from './WalletMethods';
+import { useState } from "react";
+import WalletMethods from "./WalletMethods";
 
-export default function SignUpMethods({
-  authWithEthWallet,
-  error,
-}) {
-  const [view, setView] = useState('wallet');
+export default function SignUpMethods({ authWithEthWallet, error }) {
+  const [view, setView] = useState("wallet");
 
   return (
-    <div className="container">
-      <div className="wrapper">
+    <div>
+      <div>
         {error && (
           <div className="alert alert--error">
             <p>{error.message}</p>
           </div>
         )}
 
-        {view === 'wallet' && (
+        {view === "wallet" && (
           <WalletMethods
             authWithEthWallet={authWithEthWallet}
             setView={setView}
           />
-        )}     
+        )}
       </div>
     </div>
   );

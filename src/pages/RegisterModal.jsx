@@ -22,7 +22,7 @@ const RegisterModal = () => {
 
   return (
     <>
-      <Button onClick={onOpen}>Register via Lit</Button>
+      <Button onClick={onOpen}>Register</Button>
 
       <Modal
         initialFocusRef={initialRef}
