@@ -16,9 +16,10 @@ export function GeminiEffect() {
   const pathLengthFifth = useTransform(scrollYProgress, [0, 0.8], [0, 1.2]);
 
   return (
-    (<div
-      className="h-[400vh] bg-black w-full dark:border dark:border-white/[0.1] rounded-md relative pt-40 overflow-clip"
-      ref={ref}>
+    <div
+      className="z-0 h-[400vh] bg-black w-full dark:border dark:border-white/[0.1] rounded-md relative pt-40 overflow-clip"
+      ref={ref}
+    >
       <GoogleGeminiEffect
         pathLengths={[
           pathLengthFirst,
@@ -26,7 +27,8 @@ export function GeminiEffect() {
           pathLengthThird,
           pathLengthFourth,
           pathLengthFifth,
-        ]} />
-    </div>)
+        ]}
+      />
+    </div>
   );
 }
