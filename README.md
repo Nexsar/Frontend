@@ -1,11 +1,12 @@
 # Nexsar - Frontend
 
 ## Technology
-- **Lit**
-- **Galadriel**
-- **Pimlico**
-- **ether.js**
-- **wagmi**
+| Contract                 | Contract Address                                                                                                                 |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------- |
+| **Lit**                  | Transaction Automation - Data Encryption & Decryption via. `Lit Actions` - Broadcast (off-chain) & Collection via. `Lit Actions` |
+| **Galadriel**            | Generate AI-based content                                                                                                        |
+| **Pimlico**              | Paymaster - Bundler                                                                                                              |
+| **ether.js** & **wagmi** | Blockchain Interaction                                                                                                           |
 
 ---
 
@@ -43,6 +44,9 @@ npm start
   - [Table of Contents](#table-of-contents)
   - [Distributor Dashboard](#distributor-dashboard)
     - [Account Creation and Login](#account-creation-and-login)
+      - [Metamask Authentication and PKP Integration:](#metamask-authentication-and-pkp-integration)
+      - [Smart Wallet Creation and Transaction Automation:](#smart-wallet-creation-and-transaction-automation)
+      - [Off-Chain Action Integration:](#off-chain-action-integration)
     - [Content Brief and Post Configuration](#content-brief-and-post-configuration)
     - [AI Content Generation via LIT API](#ai-content-generation-via-lit-api)
     - [Automatic Posting to Worker Dashboard](#automatic-posting-to-worker-dashboard)
@@ -61,7 +65,52 @@ npm start
 ## Distributor Dashboard
 
 ### Account Creation and Login
-Distributors use their **METAMASK** to log in through the **LIT protocol**, which offers decentralized access management and authentication. This ensures a secure environment for distributors to create and manage their accounts. Once logged in, distributors gain access to the platform’s functionalities through their unique **LIT Wallet**, which handles **encryption** and **decryption** tasks to protect their data and transactions.
+Distributors use their **METAMASK** to login through the **LIT protocol**, which offers decentralized access management and authentication. This ensures a secure environment for distributors to create and manage their accounts. Once logged in, distributors gain access to the platform’s functionalities through their unique **LIT Wallet**, which handles **`Automated Signing`** (via. *pkp creation* & *smart wallet*), **encryption** and **decryption** tasks to protect their data and transactions.
+
+<details>
+<summary>
+Implementation
+</summary>
+
+Here's a more technical and professionally framed version of your content in pointer format:
+
+#### Metamask Authentication and PKP Integration:
+- **Metamask Login:**  
+  Upon logging in via Metamask, we retrieve the **wrapped key** (private key) and initiate a session signed using the **AUTH method** from the PKP (Programmable Key Pair) generated during Metamask authentication.
+  
+- **Session Sign and Expiration:**  
+  The session signature is valid for **10 minutes** and grants specific capabilities based on user roles:
+  - **Distributor Capabilities:**
+    - Encryption
+    - Decryption
+    - Signing all resources
+    - Executing LIT Actions
+    - Implementing Access Control Conditions
+  - **Worker Capabilities:**
+    - Signing
+
+- **Session Renewal and Capability Requests:**  
+  The session signature can be updated upon expiration, allowing the request for assigned capabilities as needed, according to the LIT protocol.
+
+#### Smart Wallet Creation and Transaction Automation:
+- **Smart Wallet via LitWalletEther:**  
+  Using the session sign and **AUTH method**, a **Smart Wallet** is created through `LitWalletEther`. This wallet facilitates **automated transactions** and is integral for handling secure blockchain operations.
+  
+- **Encryption and Decryption:**  
+  The Smart Wallet's encryption and decryption features are employed to securely encrypt and decrypt sensitive distributor information, ensuring data confidentiality.
+
+#### Off-Chain Action Integration:
+- **Broadcast Functionality for Off-Chain Actions:**  
+  The platform utilizes **Broadcast** functionality to perform off-chain actions, such as:
+  - Aggregating votes.
+  - Determining winners for each post.
+  
+  These actions are directly executed by **LIT Nodes**, enabling efficient off-chain computations and maximizing participation.
+
+This structure is clear, professional, and provides a technical breakdown of the functionalities.
+<hr>
+
+</details>
 
 ### Content Brief and Post Configuration
 After logging in, distributors can provide `detailed descriptions` of the content they wish to generate. This includes specifying:
