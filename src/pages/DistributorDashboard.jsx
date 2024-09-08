@@ -56,7 +56,7 @@ const DistributorDashboard = () => {
       }
     }
 
-    sync();
+    // sync();
   }, []);
 
   return (

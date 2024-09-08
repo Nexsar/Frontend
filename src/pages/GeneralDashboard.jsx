@@ -38,21 +38,21 @@ export function GeneralDashboard() {
     },
     {
       id: 302,
-      content: "which is the best wallet",
+      content: "which is the best image",
       options: [
         {
           id: 90,
-          image_url: "/phantom.png",
+          image_url: "https://storage.googleapis.com/galadriel-assets/e1d17a54-2125-41ce-9848-fea010122cbc.png",
           votes: 40,
         },
         {
           id: 91,
-          image_url: "/metamask.png",
+          image_url: "https://storage.googleapis.com/galadriel-assets/434d7410-9ada-4b67-a680-15e13684c074.png",
           votes: 50,
         },
         {
           id: 92,
-          image_url: "/safe.png",
+          image_url: "https://storage.googleapis.com/galadriel-assets/4a6c7456-147d-4e64-999e-2bbd29442ad3.png",
           votes: 10,
         },
       ],
@@ -60,65 +60,21 @@ export function GeneralDashboard() {
     },
     {
       id: 303,
-      content: "which is the best wallet",
+      content: "which is the best image",
       options: [
         {
           id: 90,
-          image_url: "/phantom.png",
+          image_url: "https://storage.googleapis.com/galadriel-assets/856e324a-2d51-422f-ac26-4b4d3c150d84.png",
           votes: 40,
         },
         {
           id: 91,
-          image_url: "/metamask.png",
+          image_url: "https://storage.googleapis.com/galadriel-assets/3c5498ab-0ff6-4c72-9487-c8e5b8f6571e.png",
           votes: 50,
         },
         {
           id: 92,
-          image_url: "/safe.png",
-          votes: 10,
-        },
-      ],
-      done: true,
-    },
-    {
-      id: 304,
-      content: "which is the best wallet",
-      options: [
-        {
-          id: 90,
-          image_url: "/phantom.png",
-          votes: 40,
-        },
-        {
-          id: 91,
-          image_url: "/metamask.png",
-          votes: 50,
-        },
-        {
-          id: 92,
-          image_url: "/safe.png",
-          votes: 10,
-        },
-      ],
-      done: false,
-    },
-    {
-      id: 305,
-      content: "which is the best wallet",
-      options: [
-        {
-          id: 90,
-          image_url: "/phantom.png",
-          votes: 40,
-        },
-        {
-          id: 91,
-          image_url: "/metamask.png",
-          votes: 50,
-        },
-        {
-          id: 92,
-          image_url: "/safe.png",
+          image_url: "/https://storage.googleapis.com/galadriel-assets/20ef1d22-3a0a-46a1-b02a-51904ec555f9.png",
           votes: 10,
         },
       ],
