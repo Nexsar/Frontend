@@ -1,70 +1,168 @@
-# Getting Started with Create React App
+# Nexsar - Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Technology
+| Tools                    | Usage                                                                                                                            |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------- |
+| **Lit**                  | Transaction Automation - Data Encryption & Decryption via. `Lit Actions` - Broadcast (off-chain) & Collection via. `Lit Actions` |
+| **Galadriel**            | Generate AI-based content                                                                                                        |
+| **Pimlico**              | Paymaster - Bundler                                                                                                              |
+| **ether.js** & **wagmi** | Blockchain Interaction                                                                                                           |
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Introduction
+This React app provides a decentralized platform for `distributors` and `workers` to collaborate on `AI-generated content`. The platform leverages the **`LIT protocol`** for *decentralized access management* and integrates *on-chain AI agents* for generating high-quality content. Distributors can provide content briefs for AI content generation, while workers participate in evaluating the content and earning rewards through blockchain-based mechanisms.
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Installation
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+> Clone the repo
+```sh
+git clone https://github.com/Nexsar/Frontend
+cd Frontend/
+```
 
-### `npm test`
+> Build the project
+```sh
+npm i
+npm i -f # incase of errors
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+> Start the project
+```sh
+npm start
+```
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Table of Contents
+- [Nexsar - Frontend](#nexsar---frontend)
+  - [Technology](#technology)
+  - [Introduction](#introduction)
+  - [Installation](#installation)
+  - [Table of Contents](#table-of-contents)
+  - [Distributor Dashboard](#distributor-dashboard)
+    - [Account Creation and Login](#account-creation-and-login)
+      - [Metamask Authentication and PKP Integration:](#metamask-authentication-and-pkp-integration)
+      - [Smart Wallet Creation and Transaction Automation:](#smart-wallet-creation-and-transaction-automation)
+      - [Off-Chain Action Integration:](#off-chain-action-integration)
+    - [Content Brief and Post Configuration](#content-brief-and-post-configuration)
+    - [AI Content Generation via LIT API](#ai-content-generation-via-lit-api)
+    - [Automatic Posting to Worker Dashboard](#automatic-posting-to-worker-dashboard)
+  - [Worker Dashboard](#worker-dashboard)
+    - [Account Creation and Login](#account-creation-and-login-1)
+    - [Content Evaluation and Voting](#content-evaluation-and-voting)
+    - [Incentivized Participation](#incentivized-participation)
+  - [AI Integration and Content Generation](#ai-integration-and-content-generation)
+    - [On-Chain AI Agent (Galetarial)](#on-chain-ai-agent-galetarial)
+    - [AI Model Selection and Customization](#ai-model-selection-and-customization)
+  - [Security and Privacy](#security-and-privacy)
+    - [LIT Protocol](#lit-protocol)
+    - [LIT Wallet for Encryption and Decryption](#lit-wallet-for-encryption-and-decryption)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Distributor Dashboard
 
-### `npm run eject`
+### Account Creation and Login
+Distributors use their **METAMASK** to login through the **LIT protocol**, which offers decentralized access management and authentication. This ensures a secure environment for distributors to create and manage their accounts. Once logged in, distributors gain access to the platform’s functionalities through their unique **LIT Wallet**, which handles **`Automated Signing`** (via. *pkp creation* & *smart wallet*), **encryption** and **decryption** tasks to protect their data and transactions.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+| Payloads | Meaning                                                                                   |
+| -------- | ----------------------------------------------------------------------------------------- |
+| Budget   | ETH deposited to get create Posts                                                         |
+| Frequecy | How frequent you want post to be Made... Eg. 10 = 1 Post/10 mins -- 100 = 1 Post/100 mins |
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<details>
+<summary>
+Implementation
+</summary>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Here's a more technical and professionally framed version of your content in pointer format:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+#### Metamask Authentication and PKP Integration:
+- **Metamask Login:**
+  Upon logging in via Metamask, we retrieve the **wrapped key** (private key) and initiate a session signed using the **AUTH method** from the PKP (Programmable Key Pair) generated during Metamask authentication.
 
-## Learn More
+- **Session Sign and Expiration:**
+  The session signature is valid for **10 minutes** and grants specific capabilities based on user roles:
+  - **Distributor Capabilities:**
+    - Encryption
+    - Decryption
+    - Signing all resources
+    - Executing LIT Actions
+    - Implementing Access Control Conditions
+  - **Worker Capabilities:**
+    - Signing
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- **Session Renewal and Capability Requests:**
+  The session signature can be updated upon expiration, allowing the request for assigned capabilities as needed, according to the LIT protocol.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### Smart Wallet Creation and Transaction Automation:
+- **Smart Wallet via LitWalletEther:**
+  Using the session sign and **AUTH method**, a **Smart Wallet** is created through `LitWalletEther`. This wallet facilitates **automated transactions** and is integral for handling secure blockchain operations.
 
-### Code Splitting
+- **Encryption and Decryption:**
+  The Smart Wallet's encryption and decryption features are employed to securely encrypt and decrypt sensitive distributor information, ensuring data confidentiality.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+#### Off-Chain Action Integration:
+- **Broadcast Functionality for Off-Chain Actions:**
+  The platform utilizes **Broadcast** functionality to perform off-chain actions, such as:
+  - Aggregating votes.
+  - Determining winners for each post.
 
-### Analyzing the Bundle Size
+  These actions are directly executed by **LIT Nodes**, enabling efficient off-chain computations and maximizing participation.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+This structure is clear, professional, and provides a technical breakdown of the functionalities.
+<hr>
 
-### Making a Progressive Web App
+</details>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Content Brief and Post Configuration
+After logging in, distributors can provide `detailed descriptions` of the content they wish to generate. This includes specifying:
+- Content `prompt`, theme and tone.
+- `Budget allocation` for content generation.
+- Post `frequency` (handled **Cron job scheduling**).
+- Relevant details about the brand or campaign.
 
-### Advanced Configuration
+### AI Content Generation via LIT API
+The distributor’s content brief is processed through the **LIT API**, which transmits the data to the platform's AI agent. This **on-chain agent (Galetarial)** utilizes smart contracts to generate the appropriate AI-gen contents (e.g., via. **DALL-E** or **OpenAI**) based on the content prompts. The AI agent generates both images and text content, ensuring that the output aligns with the distributor’s specifications.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Automatic Posting to Worker Dashboard
+Once the AI agent generates the content, it is automatically posted to the **Worker Dashboard**. This seamless integration saves time and effort by eliminating manual content handling.
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Worker Dashboard
 
-### `npm run build` fails to minify
+### Account Creation and Login
+Similar to distributors, workers login using their Metamask Account through the **LIT protocol**. The **LIT Wallet** provides encryption and decryption to protect workers' data and ensure privacy across the platform.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Content Evaluation and Voting
+Workers evaluate AI-generated content based on the distributor’s briefs. They vote on the content they find most effective and provide feedback, offering valuable insights into public sentiment. This feedback helps distributors refine their content strategies.
+
+### Incentivized Participation
+Workers earn platform tokens for participating in the content evaluation process. Their feedback and voting are recorded on the blockchain, ensuring transparency and fairness. Tokens are awarded based on engagement, feedback quality, and how closely the worker’s vote aligns with community consensus.
+
+---
+
+## AI Integration and Content Generation
+
+### On-Chain AI Agent (Galetarial)
+The AI agent is responsible for generating content, operating **on-chain** using smart contracts. It manages the process of **AI image generation**, ensuring that the entire process is transparent, secure, and tamper-proof. Models like **DALL-E** and **OpenAI** are integrated for creating both image and text content based on provided prompts.
+
+### AI Model Selection and Customization
+The AI agent dynamically selects the most suitable AI model based on the distributor’s content brief. This allows for flexibility in catering to diverse content needs. The platform continuously updates and trains AI models to stay current with content trends and evolving requirements.
+
+---
+
+## Security and Privacy
+
+### LIT Protocol
+The **LIT protocol** is central to the platform’s security, providing decentralized access management and authentication. Both distributors and workers can be assured of their data's safety, as the LIT protocol protects against unauthorized access.
+
+### LIT Wallet for Encryption and Decryption
+The **LIT Wallet** handles encryption and decryption, ensuring sensitive information is always secure. This method enhances user trust and ensures that all communication on the platform is private and secure.
+
+---
+
+This React app leverages advanced AI models and blockchain technology to provide a decentralized, secure, and user-friendly platform for content generation and evaluation. Both distributors and workers can collaborate efficiently while ensuring their data is protected through the LIT protocol.
