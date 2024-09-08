@@ -3,7 +3,6 @@ import "./index.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 // import DistributorDashboard from "./pages/DistributorDashboard.jsx";
 import WorkerDashboard from "./pages/WorkerDashboard.jsx";
-import Home from "./pages/Home.jsx";
 import DistributorDashboard from "./pages/DistributorDashboard.jsx";
 import SignUpView from "./lit/pages/index.jsx";
 import LandingPage from "./pages/LandingPage";
@@ -11,11 +10,8 @@ import RegisterModal from "./pages/RegisterModal";
 import { Analytics } from "./pages/Analytics";
 import Encrypt from "./lit/components/encryptionDistributorData";
 // import GenerateWrappedKey from "./lit/components/wrappedkey";
-import SignupWagmi from "./lit/pages/signupWagmi";
-import Dummy from "./pages/Dummy";
 import DalleInteraction from "./components/ui/DalleInteraction.jsx";
 import InteractiveHome from "./pages/InteractiveHome";
-import Broadcast from './lit/components/broadcast';
 
 function App() {
   return (
@@ -29,7 +25,6 @@ function App() {
           <Route path="/lit" element={<SignUpView />} />
           <Route path="/register" element={<RegisterModal />} />
           <Route path="/analytics" element={<Analytics />} />
-          <Route path="/lit-sign" element={<SignupWagmi />} />
           <Route path="/sign" element={<Encrypt />} />
         </Routes>
       </BrowserRouter>

@@ -67,7 +67,6 @@ export default function SignUpView() {
     if (authMethod != undefined) {
       console.log("creation of account called");
       createAccount(authMethod);
-     
 
     }
   }, [createAccount, authMethod]);
