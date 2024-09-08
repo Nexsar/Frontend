@@ -1,7 +1,7 @@
 # Nexsar - Frontend
 
 ## Technology
-| Contract                 | Contract Address                                                                                                                 |
+| Tools                    | Usage                                                                                                                            |
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------- |
 | **Lit**                  | Transaction Automation - Data Encryption & Decryption via. `Lit Actions` - Broadcast (off-chain) & Collection via. `Lit Actions` |
 | **Galadriel**            | Generate AI-based content                                                                                                        |
