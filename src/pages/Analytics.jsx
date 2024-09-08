@@ -71,7 +71,7 @@ export function Analytics() {
         <div className="flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6">
           <CardTitle>Analytics</CardTitle>
           <CardDescription>
-            Showing total voters for the last 3 months
+            Showing total voters for the latest posts
           </CardDescription>
         </div>
       </CardHeader>

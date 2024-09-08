@@ -44,7 +44,7 @@ export default function useAuthenticate() {
 
         setAuthMethod(result);
         console.log("result is", result);
-        localStorage.setItem("AuthMethod", JSON.parse(result));
+        
       } catch (err) {
         setError(err);
       } finally {

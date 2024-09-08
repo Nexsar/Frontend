@@ -3,40 +3,43 @@ import { ethers } from 'ethers';
 import { contractABI,contractAddress } from './contract';
 
 
-export async function initDistributor() {
+export async function initDistributor(listed,initialBudget,initialFrequency) {
     try {
         const authMethod = JSON.parse(localStorage.getItem("authMethod"));
 
         await initializeWallet(authMethod);
+        
 
         const wallet = await getWallet();
         console.log("wallet is ",wallet.address);
-
+        const valueInWei = ethers.utils.parseEther(initialBudget.toString());
+        console.log("value is ",valueInWei);
 
         const params = [
-            true,
-            1,
-            100,
-            "s",
-            "hel",
-            ["hesfdsassed2","bolflssddsdd2","chalffddssfsd2"],
-            ["hedsl","boglsg","chasj"]
+            listed,
+            parseInt(initialBudget),
+            initialFrequency,
+            "13",
+            "0",
+            ["xx3","yy3","zz3"],
+            ["-1","-1","-1"]
         ];
+        console.log("params",params)
         
         const contract = new ethers.Contract(contractAddress, contractABI, wallet.provider);
 
-        const functionData = contract.interface.encodeFunctionData("initDistributor", params);
-
-        const valueInWei = ethers.utils.parseEther("0.001");
+        const functionData = contract.interface.encodeFunctionData("initDistributor",params);
+        console.log("hello")
+   
         try {
             await contract.callStatic.initDistributor(
-                true, 
-                100, 
-                100, 
-                "s",
-                "hel", 
-                ["hesfdsassed2","bolflssddsdd2","chalffddssfsd2"],
-                ["hedsl","boglsg","chasj"],
+                listed,
+                parseInt(initialBudget*10**3),
+                parseInt(initialFrequency),
+                "13",
+                "0",
+                ["xx3","yy3","zz3"],
+                ["-1","-1","-1"],
                 { value: valueInWei }
 
             );
@@ -45,13 +48,13 @@ export async function initDistributor() {
             console.error('Call Static Error for Init Dist:', error);
         }
         const estimatedGas = await contract.estimateGas.initDistributor(
-            true, 
-            100 , 
-            100, 
-            "s",
-            "hel", 
-            ["hesfdsassed2","bolflssddsdd2","chalffddssfsd2"],
-            ["hedsl","boglsg","chasj"],
+            listed,
+            parseInt(initialBudget*10**3),
+            parseInt(initialFrequency),
+            "13",
+            "0",
+            ["xx3","yy3","zz3"],
+            ["-1","-1","-1"],
             { value: valueInWei }
           );
       
@@ -77,7 +80,7 @@ export async function initDistributor() {
     }
 }
 
-export async function addPost() {
+export async function addPost(postId,description,optionIds,imageIds) {
     try {
         const authMethod = JSON.parse(localStorage.getItem("authMethod"));
 
@@ -89,22 +92,20 @@ export async function addPost() {
         
         const contract = new ethers.Contract(contractAddress, contractABI, wallet.provider);
         const param = [
-            "ads", 
-            "hel", 
-            ["csd","bsd","nsd"], 
-            ["hedl","boglg","chaj"],
+            postId, 
+            description, 
+            optionIds, 
+            imageIds,
             address
         ]
-        console.log(contract);
-        console.log(param);
         const functionData = contract.interface.encodeFunctionData("AddPost",param);
 
         try {
             await contract.callStatic.AddPost(
-                "ads", 
-                "hel", 
-                ["csd","bsd","nsd"], 
-                ["hedl","boglg","chaj"],
+                postId, 
+                description, 
+                optionIds, 
+                imageIds,
                 address
             );
             console.log('Call Static succeeded');
@@ -113,19 +114,14 @@ export async function addPost() {
         }
 
         const estimatedGas = await contract.estimateGas.AddPost(
-            "ads",  
-            "hel", 
-            ["csd","bsd","nsd"],  
-            ["hedl","boglg","chaj"],
+            postId, 
+            description, 
+            optionIds, 
+            imageIds,
             address
         );
     
         console.log('Estimated Gas:', estimatedGas.toString());
-
-        const gasPrice = await wallet.provider.getGasPrice();
-        console.log("gasprice is ",gasPrice);
-        const adjustedGasPrice = gasPrice.mul(ethers.BigNumber.from(110)).div(ethers.BigNumber.from(100)); // 10% higher
-
 
         const tx = {
             from:address,
@@ -134,15 +130,17 @@ export async function addPost() {
             gasLimit: estimatedGas.mul(ethers.BigNumber.from(110)).div(ethers.BigNumber.from(100)),
         };
 
-        const txHash = await wallet.sendTransaction(tx);
-        console.log('Transaction Hash:', txHash);
-        return txHash;
+        const txResponse = await wallet.sendTransaction(tx);
+        console.log(txResponse);
+        await txResponse.wait();
+        console.log('Transaction Confirmed');
+        return txResponse.hash;
     } catch (error) {
         console.error('Error adding post:', error);
     }
 }
 
-export async function updateBudget() {
+export async function updateBudget(amount) {
     try {
         const authMethod = JSON.parse(localStorage.getItem("authMethod"));
 
@@ -152,13 +150,13 @@ export async function updateBudget() {
         const address = await wallet.address;
         
         const contract = new ethers.Contract(contractAddress, contractABI, wallet.provider);
-        const param = [347,address]
+        const param = [amount,address]
 
         const functionData = contract.interface.encodeFunctionData("updateBudget",param)
 
         try {
             await contract.callStatic.updateBudget(
-                347,
+                amount,
                 address
             );
             console.log('Call Static succeeded');
@@ -166,16 +164,11 @@ export async function updateBudget() {
             console.error('Call Static Error updating budget:', error);
         }
         const estimatedGas = await contract.estimateGas.updateBudget(
-            347,
+            amount,
             address
         );
       
         console.log('Estimated Gas:', estimatedGas.toString());
-
-        const gasPrice = await wallet.provider.getGasPrice();
-        console.log("gasprice is ",gasPrice);
-        const adjustedGasPrice = gasPrice.mul(ethers.BigNumber.from(110)).div(ethers.BigNumber.from(100)); // 10% higher
-
 
         const tx = {
             from:address,
@@ -184,15 +177,17 @@ export async function updateBudget() {
             gasLimit: estimatedGas
         };
 
-        const txHash = await wallet.sendTransaction(tx);
-        console.log('Transaction Hash:', txHash);
-        return txHash;
+        const txResponse = await wallet.sendTransaction(tx);
+        console.log(txResponse);
+        await txResponse.wait();
+        console.log('Transaction Confirmed');
+        return txResponse.hash;
     } catch (error) {
         console.error('Error updating budget:', error);
     }
 }
 
-export async function updateDescription() {
+export async function updateDescription(description,posiId) {
     try {
         const authMethod = JSON.parse(localStorage.getItem("authMethod"));
 
@@ -202,14 +197,14 @@ export async function updateDescription() {
         const address = await wallet.address;
 
         const contract = new ethers.Contract(contractAddress, contractABI, wallet.provider);
-        const param = ["hello buddy","ads",address]
+        const param = [description,posiId,address]
 
         const functionData = contract.interface.encodeFunctionData("updateDescription",param)
 
         try {
             await contract.callStatic.updateDescription(
-                "hello buddy",
-                "ads",
+                description,
+                posiId,
                 address
             );
             console.log('Call Static succeeded');
@@ -217,17 +212,12 @@ export async function updateDescription() {
             console.error('Call Static Error updating description:', error);
         }
         const estimatedGas = await contract.estimateGas.updateDescription(
-           "hello buddy",
-            "ads",
+            description,
+            posiId,
             address
         );
       
         console.log('Estimated Gas:', estimatedGas.toString());
-
-        const gasPrice = await wallet.provider.getGasPrice();
-        console.log("gasprice is ",gasPrice);
-        const adjustedGasPrice = gasPrice.mul(ethers.BigNumber.from(110)).div(ethers.BigNumber.from(100)); // 10% higher
-
 
         const tx = {
             from:address,
@@ -236,15 +226,17 @@ export async function updateDescription() {
             gasLimit: estimatedGas
         };
 
-        const txHash = await wallet.sendTransaction(tx);
-        console.log('Transaction Hash:', txHash);
-        return txHash;
+        const txResponse = await wallet.sendTransaction(tx);
+        console.log(txResponse);
+        await txResponse.wait();
+        console.log('Transaction Confirmed');
+        return txResponse.hash;
     } catch (error) {
         console.error('Error updating description:', error);
     }
 }
 
-export async function withdrawETH() {
+export async function withdrawETH(amount) {
     try {
         const authMethod = JSON.parse(localStorage.getItem("authMethod"));
 
@@ -254,28 +246,23 @@ export async function withdrawETH() {
         const address = await wallet.address;
 
         const contract = new ethers.Contract(contractAddress, contractABI, wallet.provider);
-        const param = [12]
+        const param = [amount]
 
         const functionData = contract.interface.encodeFunctionData("withdrawETH",param)
 
         try {
             await contract.callStatic.withdrawETH(
-               12
+                amount
             );
             console.log('Call Static succeeded');
         } catch (error) {
             console.error('Call Static Error:', error);
         }
         const estimatedGas = await contract.estimateGas.withdrawETH(
-           12
+            amount
         );
       
         console.log('Estimated Gas:', estimatedGas.toString());
-
-        const gasPrice = await wallet.provider.getGasPrice();
-        console.log("gasprice is ",gasPrice);
-        const adjustedGasPrice = gasPrice.mul(ethers.BigNumber.from(110)).div(ethers.BigNumber.from(100)); // 10% higher
-
 
         const tx = {
             to: contractAddress,
@@ -284,9 +271,11 @@ export async function withdrawETH() {
             gasLimit: estimatedGas
         };
 
-        const txHash = await wallet.sendTransaction(tx);
-        console.log('Transaction Hash:', txHash);
-        return txHash;
+        const txResponse = await wallet.sendTransaction(tx);
+        console.log(txResponse);
+        await txResponse.wait();
+        console.log('Transaction Confirmed');
+        return txResponse.hash;
     } catch (error) {
         console.error('Error adding post:', error);
     }
@@ -307,7 +296,7 @@ export async function getBudget() {
         console.log('Transaction Hash:', result.toNumber());
         return result;
     } catch (error) {
-        console.error('Error getting budget:', error);
+        console.error('Error withdrawing:', error);
     }
 }
 
@@ -330,7 +319,7 @@ export async function getAllPosts() {
     }
 }
 
-export async function getParticularPost() {
+export async function getParticularPost(postId) {
     try {
         const authMethod = JSON.parse(localStorage.getItem("authMethod"));
 
@@ -338,7 +327,7 @@ export async function getParticularPost() {
 
         const wallet = await getWallet();
         const address = await wallet.address;
-        const postid = "s";
+        const postid = postId;
 
         const contract = new ethers.Contract(contractAddress, contractABI, wallet.provider);
         const result = await contract.getParticularPost(address,postid);
@@ -350,7 +339,7 @@ export async function getParticularPost() {
     }
 }
 
-export async function getAllOptions() {
+export async function getAllOptions(postId) {
     try {
         const authMethod = JSON.parse(localStorage.getItem("authMethod"));
 
@@ -358,7 +347,7 @@ export async function getAllOptions() {
 
         const wallet = await getWallet();
         const address = await wallet.address;
-        const postid = "s"
+        const postid = postId
         const contract = new ethers.Contract(contractAddress, contractABI, wallet.provider);
         const result = await contract.getAllOptions(postid);
      
@@ -369,7 +358,7 @@ export async function getAllOptions() {
     }
 }
 
-export async function getAllVotesOnPost() {
+export async function getAllVotesOnPost(postid) {
     try {
         const authMethod = JSON.parse(localStorage.getItem("authMethod"));
 

@@ -44,7 +44,7 @@ export function ScrollView() {
       setPosts(data);
     };
 
-    f();
+    // f();
   }, [posts]);
 
   const handleVotes = async (postId) => {

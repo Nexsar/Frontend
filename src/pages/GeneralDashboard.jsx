@@ -12,7 +12,7 @@ import { cn } from "../lib/utils";
 import { useEffect } from "react";
 import { PostTab } from "../components/ui/post-tab";
 
-export function GeneralDashboard({ user }) {
+export function GeneralDashboard() {
   const [posts, setPosts] = useState([
     {
       id: 301,
@@ -37,88 +37,44 @@ export function GeneralDashboard({ user }) {
       done: true,
     },
     {
-      id: 301,
-      content: "which is the best wallet",
+      id: 302,
+      content: "which is the best image",
       options: [
         {
           id: 90,
-          image_url: "/phantom.png",
+          image_url: "https://storage.googleapis.com/galadriel-assets/e1d17a54-2125-41ce-9848-fea010122cbc.png",
           votes: 40,
         },
         {
           id: 91,
-          image_url: "/metamask.png",
+          image_url: "https://storage.googleapis.com/galadriel-assets/434d7410-9ada-4b67-a680-15e13684c074.png",
           votes: 50,
         },
         {
           id: 92,
-          image_url: "/safe.png",
+          image_url: "https://storage.googleapis.com/galadriel-assets/4a6c7456-147d-4e64-999e-2bbd29442ad3.png",
           votes: 10,
         },
       ],
       done: true,
     },
     {
-      id: 301,
-      content: "which is the best wallet",
+      id: 303,
+      content: "which is the best image",
       options: [
         {
           id: 90,
-          image_url: "/phantom.png",
+          image_url: "https://storage.googleapis.com/galadriel-assets/856e324a-2d51-422f-ac26-4b4d3c150d84.png",
           votes: 40,
         },
         {
           id: 91,
-          image_url: "/metamask.png",
+          image_url: "https://storage.googleapis.com/galadriel-assets/3c5498ab-0ff6-4c72-9487-c8e5b8f6571e.png",
           votes: 50,
         },
         {
           id: 92,
-          image_url: "/safe.png",
-          votes: 10,
-        },
-      ],
-      done: true,
-    },
-    {
-      id: 301,
-      content: "which is the best wallet",
-      options: [
-        {
-          id: 90,
-          image_url: "/phantom.png",
-          votes: 40,
-        },
-        {
-          id: 91,
-          image_url: "/metamask.png",
-          votes: 50,
-        },
-        {
-          id: 92,
-          image_url: "/safe.png",
-          votes: 10,
-        },
-      ],
-      done: false,
-    },
-    {
-      id: 301,
-      content: "which is the best wallet",
-      options: [
-        {
-          id: 90,
-          image_url: "/phantom.png",
-          votes: 40,
-        },
-        {
-          id: 91,
-          image_url: "/metamask.png",
-          votes: 50,
-        },
-        {
-          id: 92,
-          image_url: "/safe.png",
+          image_url: "/https://storage.googleapis.com/galadriel-assets/20ef1d22-3a0a-46a1-b02a-51904ec555f9.png",
           votes: 10,
         },
       ],
@@ -126,34 +82,21 @@ export function GeneralDashboard({ user }) {
     },
   ]);
   useEffect(() => {
-    async function getData() {
-      //TODO : this api is not in the backend yet. create it.
-      const address = user.address;
-      const response = await fetch(
-        `localhost:8000/distributor/address${address}`,
-      );
-      const distributor = response.json.data;
-      const distributor_id = distributor.id;
-      const posts = await fetch(
-        `localhost:8000/data/posts/distributor/${distributor_id}`,
-      );
-      setPosts(posts);
-    }
-
+    // setPosts(posts_list)
     //call the getData function here
   }, []);
 
   const links = [
     {
       label: "Home",
-      href: "/home",
+      href: "/",
       icon: (
         <IconBrandTabler className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
       ),
     },
     {
       label: "Register",
-      href: "/register",
+      href: "/home",
       icon: (
         <IconUserBolt className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
       ),
@@ -188,11 +131,11 @@ export function GeneralDashboard({ user }) {
           <div>
             <SidebarLink
               link={{
-                label: "Manu Arora",
+                label: `${JSON.parse(localStorage.getItem("pkp"))?.ethAddress.substr(0,7)}..`,
                 href: "#",
                 icon: (
                   <img
-                    src="https://assets.aceternity.com/manu.png"
+                    src="/metamask.png"
                     className="h-7 w-7 flex-shrink-0 rounded-full"
                     width={50}
                     height={50}

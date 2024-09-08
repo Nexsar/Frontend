@@ -5,22 +5,24 @@ import { ScrollArea } from "../components/ui/scroll-area";
 import { Separator } from "../components/ui/separator";
 import { useEffect } from "react";
 import { useState } from "react";
-import {
-  initWorker,
-  removeWorker,
-  updateRewards,
-  updateVotingMapping,
-  withdrawRewards,
-  getWorker,
-  getRewards,
-  getVotedOption,
-  getAllWorkersRewards,
-} from "../lib/worker.js";
+import { Input } from "../components/ui/input.jsx";
+
+// import {
+//   initWorker,
+//   removeWorker,
+//   updateRewards,
+//   updateVotingMapping,
+//   withdrawRewards,
+//   getWorker,
+//   getRewards,
+//   getVotedOption,
+//   getAllWorkersRewards,
+// } from "../lib/worker.js";
 
 import { Alert, AlertDescription, AlertTitle } from "../components/ui/alert";
 import { Terminal } from "lucide-react";
 
-import * as Distributor from "../lib/distributor.js";
+// import * as Distributor from "../lib/distributor.js";
 import AnimatedOption from "./AnimatedOption.jsx";
 import OptionGrid from "./OptionGrid.jsx";
 import { Heart } from "lucide-react";
@@ -53,42 +55,42 @@ const WorkerFeed = () => {
     },
     {
       id: 2,
-      content: "which is the best wallet?",
+      content: "which is the best image",
       options: [
         {
           id: 4,
-          image_url: "/metamask.png",
+          image_url: "https://storage.googleapis.com/galadriel-assets/20ef1d22-3a0a-46a1-b02a-51904ec555f9.png",
           votes: 12,
         },
         {
           id: 5,
-          image_url: "/phantom.png",
+          image_url: "https://storage.googleapis.com/galadriel-assets/3c5498ab-0ff6-4c72-9487-c8e5b8f6571e.png",
           votes: 34,
         },
         {
           id: 6,
-          image_url: "/safe.jpg",
+          image_url: "https://storage.googleapis.com/galadriel-assets/856e324a-2d51-422f-ac26-4b4d3c150d84.png",
           votes: 90,
         },
       ],
     },
     {
       id: 3,
-      content: "which is the best wallet?",
+      content: "which is the best image",
       options: [
         {
           id: 7,
-          image_url: "/metamask.png",
+          image_url: "https://storage.googleapis.com/galadriel-assets/4a6c7456-147d-4e64-999e-2bbd29442ad3.png",
           votes: 12,
         },
         {
           id: 8,
-          image_url: "/phantom.png",
+          image_url: "https://storage.googleapis.com/galadriel-assets/434d7410-9ada-4b67-a680-15e13684c074.png",
           votes: 34,
         },
         {
           id: 9,
-          image_url: "/safe.jpg",
+          image_url: "https://storage.googleapis.com/galadriel-assets/e1d17a54-2125-41ce-9848-fea010122cbc.png",
           votes: 90,
         },
       ],
@@ -120,16 +122,10 @@ const WorkerFeed = () => {
       }
     };
 
-    getPosts();
+    // getPosts();
   }, [posts]);
 
-  const handleVotes = async (postId) => {
-    return await Distributor.getTotalVotesOnPost(postId);
-  };
-
-  const handleOptions = async (postId) => {
-    return await Distributor.getAllOptions(postId);
-  };
+ 
 
   const handleSelected = (post_id, option_id) => {
     setSelectedPost(post_id);
@@ -182,7 +178,9 @@ const WorkerFeed = () => {
                     })}
                   </div>
                 </div>
-                <div className="flex items-center justify-center px-4 py-3">
+                <div className="flex items-center justify-around px-4 py-3 mx-5">
+           
+                  <Input className="h-[62px] w-[400px]"placeholder="Feedback"/>
                   <Button
                     variant="destructive"
                     onClick={() => handleVote(post.id)}

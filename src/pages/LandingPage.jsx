@@ -27,7 +27,7 @@ const LandingPage = () => {
           Register
         </Button>
       </div>{" "}
-      <div className="fixed top-[85vh] left-[39.5vw] z-30 h-[15vh]">
+      <div className="fixed top-[85vh] left-[40.5vw] z-30 h-[15vh]">
         <Navbar />
       </div>
       <div>

@@ -11,11 +11,14 @@ export async function initWorker() {
 
         const wallet = await getWallet();
         const address = await wallet.address;
+        console.log(address);
 
         
         const contract = new ethers.Contract(contractAddress, contractABI, wallet.provider);
+        console.log("contract is ",contract);
 
-        const functionData = contract.interface.encodeFunctionData("initWorker");
+        const functionData = contract.interface.encodeFunctionData("initWorker",[]);
+        console.log("function data ",functionData)
 
         try {
             await contract.callStatic.initWorker();
@@ -32,7 +35,7 @@ export async function initWorker() {
 
         const tx = {
             from:address,
-            to: WcontractAddress,
+            to: contractAddress,
             data: functionData,
             gasLimit: estimatedGas.mul(ethers.BigNumber.from(110)).div(ethers.BigNumber.from(100)),
         };

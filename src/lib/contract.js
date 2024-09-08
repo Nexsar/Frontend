@@ -84,6 +84,13 @@ export const contractABI=[
 	},
 	{
 		"inputs": [],
+		"name": "initWorker",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
 		"stateMutability": "nonpayable",
 		"type": "constructor"
 	},
@@ -299,6 +306,24 @@ export const contractABI=[
 	{
 		"inputs": [
 			{
+				"internalType": "address[]",
+				"name": "workers",
+				"type": "address[]"
+			},
+			{
+				"internalType": "uint256",
+				"name": "rewards",
+				"type": "uint256"
+			}
+		],
+		"name": "updateRewards",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "uint64[]",
 				"name": "votes",
 				"type": "uint64[]"
@@ -327,6 +352,29 @@ export const contractABI=[
 	{
 		"inputs": [
 			{
+				"internalType": "address[]",
+				"name": "workers",
+				"type": "address[]"
+			},
+			{
+				"internalType": "string[]",
+				"name": "postIds",
+				"type": "string[]"
+			},
+			{
+				"internalType": "string[]",
+				"name": "optionIds",
+				"type": "string[]"
+			}
+		],
+		"name": "updateVotingMapping",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "uint256",
 				"name": "amount",
 				"type": "uint256"
@@ -335,6 +383,13 @@ export const contractABI=[
 		"name": "withdrawETH",
 		"outputs": [],
 		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "withdrawRewards",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -532,6 +587,25 @@ export const contractABI=[
 	{
 		"inputs": [
 			{
+				"internalType": "address",
+				"name": "worker",
+				"type": "address"
+			}
+		],
+		"name": "getRewards",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "string",
 				"name": "postId",
 				"type": "string"
@@ -543,6 +617,30 @@ export const contractABI=[
 				"internalType": "uint256",
 				"name": "totalVotes",
 				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "worker",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "postId",
+				"type": "string"
+			}
+		],
+		"name": "getVotedOption",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
 			}
 		],
 		"stateMutability": "view",
@@ -581,5 +679,4 @@ export const contractABI=[
 		"type": "function"
 	}
 ];
-
-export const contractAddress = "0x3d6261469680045118341E8cfF7A6749606037e0"
+export const contractAddress = "0x9800E70e6531c5ABFaa6df5f8F5152a18998C701"
