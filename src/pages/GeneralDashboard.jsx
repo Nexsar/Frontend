@@ -12,7 +12,7 @@ import { cn } from "../lib/utils";
 import { useEffect } from "react";
 import { PostTab } from "../components/ui/post-tab";
 
-export function GeneralDashboard({posts_list}) {
+export function GeneralDashboard() {
   const [posts, setPosts] = useState([
     {
       id: 301,
@@ -37,7 +37,7 @@ export function GeneralDashboard({posts_list}) {
       done: true,
     },
     {
-      id: 301,
+      id: 302,
       content: "which is the best wallet",
       options: [
         {
@@ -59,7 +59,7 @@ export function GeneralDashboard({posts_list}) {
       done: true,
     },
     {
-      id: 301,
+      id: 303,
       content: "which is the best wallet",
       options: [
         {
@@ -81,7 +81,7 @@ export function GeneralDashboard({posts_list}) {
       done: true,
     },
     {
-      id: 301,
+      id: 304,
       content: "which is the best wallet",
       options: [
         {
@@ -103,7 +103,7 @@ export function GeneralDashboard({posts_list}) {
       done: false,
     },
     {
-      id: 301,
+      id: 305,
       content: "which is the best wallet",
       options: [
         {
@@ -126,21 +126,21 @@ export function GeneralDashboard({posts_list}) {
     },
   ]);
   useEffect(() => {
-    setPosts(posts_list)
+    // setPosts(posts_list)
     //call the getData function here
   }, []);
 
   const links = [
     {
       label: "Home",
-      href: "/home",
+      href: "/",
       icon: (
         <IconBrandTabler className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
       ),
     },
     {
       label: "Register",
-      href: "/register",
+      href: "/home",
       icon: (
         <IconUserBolt className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
       ),
@@ -175,11 +175,11 @@ export function GeneralDashboard({posts_list}) {
           <div>
             <SidebarLink
               link={{
-                label: `${JSON.parse(localStorage.getItem("pkp")).ethAddress.substr(0,7)}..`,
+                label: `${JSON.parse(localStorage.getItem("pkp"))?.ethAddress.substr(0,7)}..`,
                 href: "#",
                 icon: (
                   <img
-                    src="https://assets.aceternity.com/manu.png"
+                    src="/metamask.png"
                     className="h-7 w-7 flex-shrink-0 rounded-full"
                     width={50}
                     height={50}

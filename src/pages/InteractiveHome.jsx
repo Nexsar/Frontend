@@ -40,7 +40,7 @@ const InteractiveHome = () => {
   const [personality, setPersonality] = useState("Student");
   const [frequency, setFrequency] = useState(100);
   const [budget, setBudget] = useState(0);
-  const [jugad, setJugad] = useState(null);
+  const [jugad, setJugad] = useState(1);
 
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
@@ -48,9 +48,9 @@ const InteractiveHome = () => {
   const user = useSelector((state) => state.user);
   console.log({user});
 
-  if(!user.is_lit_authenticated){
-    navigate("/lit");
-  }
+  // if(!user.is_lit_authenticated){
+  //   navigate("/lit");
+  // }
 
   console.log({ user });
   // const pkp = ;
@@ -146,8 +146,9 @@ const InteractiveHome = () => {
         handleWorker();
         break;
       default:
-        return;
+        break;
     }
+    onClose();
   }
 
   return (
