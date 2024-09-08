@@ -1,12 +1,18 @@
 # Nexsar - Frontend
 
+## Project Components
+| Components      | URL                                               |
+| --------------- | ------------------------------------------------- |
+| Backend         | [Link](https://github.com/Nexsar/Backend)         |
+| Smart Contracts | [Link](https://github.com/Nexsar/Smart-Contracts) |
+
 ## Technology
-| Tools                    | Usage                                                                                                                            |
-| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------- |
-| **Lit**                  | Transaction Automation - Data Encryption & Decryption via. `Lit Actions` - Broadcast (off-chain) & Collection via. `Lit Actions` |
-| **Galadriel**            | Generate AI-based content                                                                                                        |
-| **Pimlico**              | Paymaster - Bundler                                                                                                              |
-| **ether.js** & **wagmi** | Blockchain Interaction                                                                                                           |
+| Tools                    | Usage                                                                                                                                                                                                                                                                                             |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Lit**                  | Transaction Automation - Data [Encryption & Decryption](https://github.com/Nexsar/Frontend/blob/main/src/lit/EncryptionDecryption.ts) via. `Lit Actions` - [Broadcast (off-chain)](https://github.com/Nexsar/Frontend/blob/main/src/lit/components/broadcast.jsx) & Collection via. `Lit Actions` |
+| **Galadriel**            | Generate AI-based content                                                                                                                                                                                                                                                                         |
+| **Pimlico**              | Paymaster - Bundler                                                                                                                                                                                                                                                                               |
+| **ether.js** & **wagmi** | Blockchain Interaction                                                                                                                                                                                                                                                                            |
 
 ---
 
@@ -38,6 +44,7 @@ npm start
 
 ## Table of Contents
 - [Nexsar - Frontend](#nexsar---frontend)
+  - [Project Components](#project-components)
   - [Technology](#technology)
   - [Introduction](#introduction)
   - [Installation](#installation)
@@ -70,6 +77,7 @@ Distributors use their **METAMASK** to login through the **LIT protocol**, which
 | Payloads | Meaning                                                                                   |
 | -------- | ----------------------------------------------------------------------------------------- |
 | Budget   | ETH deposited to get create Posts                                                         |
+| Frequecy | How frequent you want post to be Made... Eg. 10 = 1 Post/10 mins -- 100 = 1 Post/100 mins |
 | Frequecy | How frequent you want post to be Made... Eg. 10 = 1 Post/10 mins -- 100 = 1 Post/100 mins |
 
 <details>
