@@ -60,7 +60,7 @@ const WalletMethods = ({ authWithEthWallet, setView }) => {
                 connector.name.toLowerCase(),
               );
               return (
-                <CommandItem className="h-[10vh] flex">
+                <CommandItem className="h-[10vh] flex justify-between py-3 text-white">
                   <SymbolIcon className="mr-2 h-4 w-4" />
                   <Button
                     variant="secondary"
