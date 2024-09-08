@@ -1,6 +1,4 @@
-import { getWorkerData } from "../lib/helper";
 import React from "react";
-import { ScrollView } from "./ScrollView";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";

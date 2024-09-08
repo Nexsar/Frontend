@@ -1,6 +1,5 @@
 import "./App.css";
 import "./index.css";
-import SmartContractUI from "./components/SmartContractUI.jsx";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 // import DistributorDashboard from "./pages/DistributorDashboard.jsx";
 import WorkerDashboard from "./pages/WorkerDashboard.jsx";

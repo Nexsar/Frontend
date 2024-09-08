@@ -52,7 +52,7 @@ const WalletMethods = ({ authWithEthWallet, setView }) => {
             <CommandList>
               <CommandEmpty>No results found.</CommandEmpty>
               <CommandGroup className="h-full overflow-y-scroll">
-            {filteredConnectors.map((connector) => {
+               {filteredConnectors.map((connector) => {
               const appearance = get_color_for_wallet + " text-white";
               console.log("connector from map is ",connector);
               const img_src = get_image_src_for_wallet(
@@ -82,7 +82,9 @@ const WalletMethods = ({ authWithEthWallet, setView }) => {
           </CommandGroup>
         </CommandList>
       </Command>
-    </>
+      </div>
+      </div>
+  </>
   );
 };
 

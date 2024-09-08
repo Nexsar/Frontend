@@ -5,22 +5,22 @@ import { ScrollArea } from "../components/ui/scroll-area";
 import { Separator } from "../components/ui/separator";
 import { useEffect } from "react";
 import { useState } from "react";
-import {
-  initWorker,
-  removeWorker,
-  updateRewards,
-  updateVotingMapping,
-  withdrawRewards,
-  getWorker,
-  getRewards,
-  getVotedOption,
-  getAllWorkersRewards,
-} from "../lib/worker.js";
+// import {
+//   initWorker,
+//   removeWorker,
+//   updateRewards,
+//   updateVotingMapping,
+//   withdrawRewards,
+//   getWorker,
+//   getRewards,
+//   getVotedOption,
+//   getAllWorkersRewards,
+// } from "../lib/worker.js";
 
 import { Alert, AlertDescription, AlertTitle } from "../components/ui/alert";
 import { Terminal } from "lucide-react";
 
-import * as Distributor from "../lib/distributor.js";
+// import * as Distributor from "../lib/distributor.js";
 import AnimatedOption from "./AnimatedOption.jsx";
 import OptionGrid from "./OptionGrid.jsx";
 import { Heart } from "lucide-react";
