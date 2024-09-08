@@ -46,11 +46,16 @@ const InteractiveHome = () => {
   const finalRef = React.useRef(null);
 
   const user = useSelector((state) => state.user);
+  console.log({user});
+
+  if(!user.is_lit_authenticated){
+    navigate("/lit");
+  }
 
   console.log({ user });
   // const pkp = ;
   const pkp = JSON.parse(localStorage.getItem('pkp'));
-  const ethAddress = pkp.ethAddress;
+  const ethAddress = pkp?.ethAddress;
 
 
 
