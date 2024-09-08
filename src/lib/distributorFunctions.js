@@ -12,32 +12,35 @@ export async function initDistributor(listed,initialBudget,initialFrequency) {
 
         const wallet = await getWallet();
         console.log("wallet is ",wallet.address);
-
+        const valueInWei = ethers.utils.parseEther(initialBudget.toString());
+        console.log("value is ",valueInWei);
 
         const params = [
             listed,
-            initialBudget,
+            parseInt(initialBudget),
             initialFrequency,
-            "1",
+            "13",
             "0",
-            ["xx","yy","zz"],
+            ["xx3","yy3","zz3"],
             ["-1","-1","-1"]
         ];
+        console.log("params",params)
         
         const contract = new ethers.Contract(contractAddress, contractABI, wallet.provider);
 
-        const functionData = contract.interface.encodeFunctionData("initDistributor", params);
-
-        const valueInWei = ethers.utils.parseEther(((initialBudget)/1000).toString());
+        const functionData = contract.interface.encodeFunctionData("initDistributor",params);
+        console.log("hello")
+   
         try {
             await contract.callStatic.initDistributor(
                 listed,
-                initialBudget,
-                initialFrequency,
-                "1",
+                parseInt(initialBudget*10**3),
+                parseInt(initialFrequency),
+                "13",
                 "0",
-                ["xx","yy","zz"],
-                ["-1","-1","-1"]
+                ["xx3","yy3","zz3"],
+                ["-1","-1","-1"],
+                { value: valueInWei }
 
             );
             console.log('Call Static succeeded');
@@ -46,11 +49,11 @@ export async function initDistributor(listed,initialBudget,initialFrequency) {
         }
         const estimatedGas = await contract.estimateGas.initDistributor(
             listed,
-            initialBudget,
-            initialFrequency,
-            "1",
+            parseInt(initialBudget*10**3),
+            parseInt(initialFrequency),
+            "13",
             "0",
-            ["xx","yy","zz"],
+            ["xx3","yy3","zz3"],
             ["-1","-1","-1"],
             { value: valueInWei }
           );

@@ -1,7 +1,6 @@
 import { Button as ButtonShad } from "../components/ui/Button";
 import React from "react";
 import { Boxes } from "../components/ui/background-boxes";
-import { cn } from "../lib/utils";
 import { useNavigate } from "react-router-dom";
 import { CardSpotlight } from "../components/ui/card-spotlight";
 import { useSelector, useDispatch } from "react-redux";
@@ -150,10 +149,12 @@ const InteractiveHome = () => {
     <>
       {jugad ? <div>
         <div className="fixed z-30 top-2 right-2 bg-black mr-4 mt-3">
-          <ButtonShad
-            className="inline-flex h-[52px] text-xl w-[490px] animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white"
-          ><p>Wallet Address:  {`${ethAddress.substr(0, 13)}...`}</p>
-          </ButtonShad>
+          <div
+            className="inline-flex h-[52px] text-xl w-[690px] animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white"
+          >
+            <p>Wallet Address:  {`${ethAddress}`}</p>
+            </div>
+         
         </div>
         <div className="h-screen relative w-full overflow-hidden bg-black flex flex-col items-center justify-center rounded-lg">
           <div className="absolute inset-0 w-full h-full bg-slate-900 z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none" />

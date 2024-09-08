@@ -1,5 +1,95 @@
 export const contractABI=[
 	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "postId",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "description",
+				"type": "string"
+			},
+			{
+				"internalType": "string[]",
+				"name": "optionIds",
+				"type": "string[]"
+			},
+			{
+				"internalType": "string[]",
+				"name": "imageUrls",
+				"type": "string[]"
+			},
+			{
+				"internalType": "address",
+				"name": "distributorAddress",
+				"type": "address"
+			}
+		],
+		"name": "AddPost",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "depositETH",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bool",
+				"name": "listed",
+				"type": "bool"
+			},
+			{
+				"internalType": "uint256",
+				"name": "initialBudget",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "initialFrequency",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "postId",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "description",
+				"type": "string"
+			},
+			{
+				"internalType": "string[]",
+				"name": "optionIds",
+				"type": "string[]"
+			},
+			{
+				"internalType": "string[]",
+				"name": "imageUrls",
+				"type": "string[]"
+			}
+		],
+		"name": "initDistributor",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "initWorker",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"stateMutability": "nonpayable",
 		"type": "constructor"
@@ -173,6 +263,136 @@ export const contractABI=[
 		"type": "event"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "budget",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "distributorAddress",
+				"type": "address"
+			}
+		],
+		"name": "updateBudget",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "desc",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "postId",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "distributorAddress",
+				"type": "address"
+			}
+		],
+		"name": "updateDescription",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address[]",
+				"name": "workers",
+				"type": "address[]"
+			},
+			{
+				"internalType": "uint256",
+				"name": "rewards",
+				"type": "uint256"
+			}
+		],
+		"name": "updateRewards",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint64[]",
+				"name": "votes",
+				"type": "uint64[]"
+			},
+			{
+				"internalType": "string[]",
+				"name": "optionIds",
+				"type": "string[]"
+			},
+			{
+				"internalType": "address",
+				"name": "distributorAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "postId",
+				"type": "string"
+			}
+		],
+		"name": "updateVotes",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address[]",
+				"name": "workers",
+				"type": "address[]"
+			},
+			{
+				"internalType": "string[]",
+				"name": "postIds",
+				"type": "string[]"
+			},
+			{
+				"internalType": "string[]",
+				"name": "optionIds",
+				"type": "string[]"
+			}
+		],
+		"name": "updateVotingMapping",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "withdrawETH",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "withdrawRewards",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -197,46 +417,6 @@ export const contractABI=[
 		],
 		"name": "WorkerRemoved",
 		"type": "event"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "postId",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "description",
-				"type": "string"
-			},
-			{
-				"internalType": "string[]",
-				"name": "optionIds",
-				"type": "string[]"
-			},
-			{
-				"internalType": "string[]",
-				"name": "imageUrls",
-				"type": "string[]"
-			},
-			{
-				"internalType": "address",
-				"name": "distributorAddress",
-				"type": "address"
-			}
-		],
-		"name": "AddPost",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "depositETH",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
 	},
 	{
 		"inputs": [
@@ -467,56 +647,6 @@ export const contractABI=[
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "bool",
-				"name": "listed",
-				"type": "bool"
-			},
-			{
-				"internalType": "uint256",
-				"name": "initialBudget",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "initialFrequency",
-				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "postId",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "description",
-				"type": "string"
-			},
-			{
-				"internalType": "string[]",
-				"name": "optionIds",
-				"type": "string[]"
-			},
-			{
-				"internalType": "string[]",
-				"name": "imageUrls",
-				"type": "string[]"
-			}
-		],
-		"name": "initDistributor",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "initWorker",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"inputs": [],
 		"name": "owner",
 		"outputs": [
@@ -547,136 +677,6 @@ export const contractABI=[
 		],
 		"stateMutability": "view",
 		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "budget",
-				"type": "uint256"
-			},
-			{
-				"internalType": "address",
-				"name": "distributorAddress",
-				"type": "address"
-			}
-		],
-		"name": "updateBudget",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "desc",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "postId",
-				"type": "string"
-			},
-			{
-				"internalType": "address",
-				"name": "distributorAddress",
-				"type": "address"
-			}
-		],
-		"name": "updateDescription",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address[]",
-				"name": "workers",
-				"type": "address[]"
-			},
-			{
-				"internalType": "uint256",
-				"name": "rewards",
-				"type": "uint256"
-			}
-		],
-		"name": "updateRewards",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint64[]",
-				"name": "votes",
-				"type": "uint64[]"
-			},
-			{
-				"internalType": "string[]",
-				"name": "optionIds",
-				"type": "string[]"
-			},
-			{
-				"internalType": "address",
-				"name": "distributorAddress",
-				"type": "address"
-			},
-			{
-				"internalType": "string",
-				"name": "postId",
-				"type": "string"
-			}
-		],
-		"name": "updateVotes",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address[]",
-				"name": "workers",
-				"type": "address[]"
-			},
-			{
-				"internalType": "string[]",
-				"name": "postIds",
-				"type": "string[]"
-			},
-			{
-				"internalType": "string[]",
-				"name": "optionIds",
-				"type": "string[]"
-			}
-		],
-		"name": "updateVotingMapping",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "withdrawETH",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "withdrawRewards",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
 	}
-]
+];
 export const contractAddress = "0x9800E70e6531c5ABFaa6df5f8F5152a18998C701"
