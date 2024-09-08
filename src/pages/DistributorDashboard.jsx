@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Menubar } from "./Menubar";
@@ -10,33 +10,40 @@ import { GeneralDashboard } from "./GeneralDashboard";
 const DistributorDashboard = () => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
+  const [posts, setPosts] = useState([]);
+
+  if(!user){
+    navigate("/");
+  }
 
   useEffect(() => {
-    console.log({ user }, user.type);
-    if (!user) {
-      navigate("/");
-    } else if (user.type != "distributor") {
-      navigate("/home");
-    }
-    async function init() {
+    console.log("getting all posts from the backend to send to blockchain..!");
+    async function sync() {
       try {
-        const client = new LitJsSdk.LitNodeClient({
-          litNetwork: LitNetwork.DatilDev,
-          debug: false,
-        });
+        const address = JSON.parse(localStorage.getItem('pkp')).ethAddress;
+        console.log("address",address);
 
-        await client.connect();
+        const posts_endpoint = `http://192.168.45.90:8000/posts/distributor/${address}`
+        const posts_for_this_distributor = await fetch(posts_endpoint,{
+          method: "GET",
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        console.log("posts for this distributor", posts_for_this_distributor);
+        setPosts(posts_for_this_distributor);
+        //send this to the contract:
       } catch (err) {
         console.log("error:", err);
       }
     }
 
-    init();
+    sync();
   }, []);
 
   return (
     <div className="flex mt-4 h-[50vh]">
-      <GeneralDashboard />
+      <GeneralDashboard posts_list={posts} />
     </div>
   );
 };

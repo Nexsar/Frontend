@@ -12,7 +12,7 @@ import { cn } from "../lib/utils";
 import { useEffect } from "react";
 import { PostTab } from "../components/ui/post-tab";
 
-export function GeneralDashboard({ user }) {
+export function GeneralDashboard({posts_list}) {
   const [posts, setPosts] = useState([
     {
       id: 301,
@@ -126,20 +126,7 @@ export function GeneralDashboard({ user }) {
     },
   ]);
   useEffect(() => {
-    async function getData() {
-      //TODO : this api is not in the backend yet. create it.
-      const address = user.address;
-      const response = await fetch(
-        `localhost:8000/distributor/address${address}`,
-      );
-      const distributor = response.json.data;
-      const distributor_id = distributor.id;
-      const posts = await fetch(
-        `localhost:8000/data/posts/distributor/${distributor_id}`,
-      );
-      setPosts(posts);
-    }
-
+    setPosts(posts_list)
     //call the getData function here
   }, []);
 
@@ -188,7 +175,7 @@ export function GeneralDashboard({ user }) {
           <div>
             <SidebarLink
               link={{
-                label: "Manu Arora",
+                label: `${JSON.parse(localStorage.getItem("pkp")).ethAddress.substr(0,7)}..`,
                 href: "#",
                 icon: (
                   <img

@@ -3,11 +3,12 @@ import { ethers } from 'ethers';
 import { contractABI,contractAddress } from './contract';
 
 
-export async function initDistributor(listed,initialBudget,initialFrequency,postId,description,optionIds,imageIds,value) {
+export async function initDistributor(listed,initialBudget,initialFrequency) {
     try {
         const authMethod = JSON.parse(localStorage.getItem("authMethod"));
 
         await initializeWallet(authMethod);
+        
 
         const wallet = await getWallet();
         console.log("wallet is ",wallet.address);
@@ -17,26 +18,26 @@ export async function initDistributor(listed,initialBudget,initialFrequency,post
             listed,
             initialBudget,
             initialFrequency,
-            postId,
-            description,
-            optionIds,
-            imageIds
+            "1",
+            "0",
+            ["xx","yy","zz"],
+            ["-1","-1","-1"]
         ];
         
         const contract = new ethers.Contract(contractAddress, contractABI, wallet.provider);
 
         const functionData = contract.interface.encodeFunctionData("initDistributor", params);
 
-        const valueInWei = ethers.utils.parseEther(value);
+        const valueInWei = ethers.utils.parseEther(((initialBudget)/1000).toString());
         try {
             await contract.callStatic.initDistributor(
                 listed,
                 initialBudget,
                 initialFrequency,
-                postId,
-                description,
-                optionIds,
-                imageIds
+                "1",
+                "0",
+                ["xx","yy","zz"],
+                ["-1","-1","-1"]
 
             );
             console.log('Call Static succeeded');
@@ -47,10 +48,10 @@ export async function initDistributor(listed,initialBudget,initialFrequency,post
             listed,
             initialBudget,
             initialFrequency,
-            postId,
-            description,
-            optionIds,
-            imageIds,
+            "1",
+            "0",
+            ["xx","yy","zz"],
+            ["-1","-1","-1"],
             { value: valueInWei }
           );
       

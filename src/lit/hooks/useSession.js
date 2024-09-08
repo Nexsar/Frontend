@@ -2,8 +2,9 @@ import { useCallback, useState } from 'react';
 import { getSessionSigsForDistributor } from '../utils/lit';
 import { LitAbility, LitActionResource } from '@lit-protocol/auth-helpers';
 import { useDispatch, useSelector } from 'react-redux';
-import { setAddress, setPublicKey } from '@/slices/userSlice';
+import { setAddress, setPublicKey } from '../../slices/userSlice';
 import { useNavigate} from "react-router-dom";
+import { initializeWallet } from '../../lib/walletManager';
 
 export default function useSession() {
 
@@ -26,10 +27,7 @@ export default function useSession() {
         ).toISOString();
         console.log("pkp public key is ",pkp.publicKey, "and pkp is ", pkp);
 
-        dispatch(setIsLitAuthenticated(true));
-        dispatch(setPublicKey(pkp.publicKey));
-        dispatch(setAddress(pkp.ethAddress));
-        console.log(user);
+        
 
 
         localStorage.setItem("pkp",JSON.stringify(pkp));
@@ -40,6 +38,9 @@ export default function useSession() {
         });
         setSessionSigs(sessionSigs);
         console.log("session signs ares",sessionSigs);
+        const pkpWallet = await initializeWallet(authMethod);
+        localStorage.setItem("wallet",JSON.stringify(pkpWallet));
+        console.log(pkpWallet);
       } catch (err) {
         setError(err);
       } finally {

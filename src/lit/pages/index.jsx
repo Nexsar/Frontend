@@ -15,6 +15,7 @@ import {
   setPublicKey,
   resetUser,
 } from "../../slices/userSlice";
+import InteractiveHome from "../../pages/InteractiveHome";
 
 export default function SignUpView() {
   const navigate = useNavigate();
@@ -103,8 +104,15 @@ export default function SignUpView() {
   }
 
   if (currentAccount && sessionSigs) {
+        const pkp = JSON.parse(localStorage.getItem('pkp'));
+        console.log("pkp from index",pkp);
+        dispatch(setIsLitAuthenticated(true));
+        dispatch(setPublicKey(pkp.publicKey));
+        dispatch(setAddress(pkp.ethAddress));
+        console.log("inside session",user);
     return (
-      <Dashboard currentAccount={currentAccount} sessionSigs={sessionSigs} />
+      // <Dashboard currentAccount={currentAccount} sessionSigs={sessionSigs} />
+      <InteractiveHome/>
     );
   } else {
     return (

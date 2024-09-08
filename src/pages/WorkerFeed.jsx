@@ -5,6 +5,8 @@ import { ScrollArea } from "../components/ui/scroll-area";
 import { Separator } from "../components/ui/separator";
 import { useEffect } from "react";
 import { useState } from "react";
+import { Input } from "../components/ui/input.jsx";
+
 // import {
 //   initWorker,
 //   removeWorker,
@@ -123,13 +125,7 @@ const WorkerFeed = () => {
     getPosts();
   }, [posts]);
 
-  const handleVotes = async (postId) => {
-    return await Distributor.getTotalVotesOnPost(postId);
-  };
-
-  const handleOptions = async (postId) => {
-    return await Distributor.getAllOptions(postId);
-  };
+ 
 
   const handleSelected = (post_id, option_id) => {
     setSelectedPost(post_id);
@@ -182,7 +178,9 @@ const WorkerFeed = () => {
                     })}
                   </div>
                 </div>
-                <div className="flex items-center justify-center px-4 py-3">
+                <div className="flex items-center justify-around px-4 py-3 mx-5">
+           
+                  <Input className="h-[62px] w-[400px]"placeholder="Feedback"/>
                   <Button
                     variant="destructive"
                     onClick={() => handleVote(post.id)}
