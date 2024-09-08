@@ -55,7 +55,7 @@ npm start
     - [Content Evaluation and Voting](#content-evaluation-and-voting)
     - [Incentivized Participation](#incentivized-participation)
   - [AI Integration and Content Generation](#ai-integration-and-content-generation)
-    - [On-Chain AI Agent (Galetarial)](#on-chain-ai-agent-galetarial)
+    - [On-Chain AI Agent (Galadriel)](#on-chain-ai-agent-Galadriel)
     - [AI Model Selection and Customization](#ai-model-selection-and-customization)
   - [Security and Privacy](#security-and-privacy)
     - [LIT Protocol](#lit-protocol)
@@ -120,7 +120,7 @@ After logging in, distributors can provide `detailed descriptions` of the conten
 - Relevant details about the brand or campaign.
 
 ### AI Content Generation via LIT API
-The distributor’s content brief is processed through the **LIT API**, which transmits the data to the platform's AI agent. This **on-chain agent (Galetarial)** utilizes smart contracts to generate the appropriate AI-gen contents (e.g., via. **DALL-E** or **OpenAI**) based on the content prompts. The AI agent generates both images and text content, ensuring that the output aligns with the distributor’s specifications.
+The distributor’s content brief is processed through the **LIT API**, which transmits the data to the platform's AI agent. This **on-chain agent (Galadriel)** utilizes smart contracts to generate the appropriate AI-gen contents (e.g., via. **DALL-E** or **OpenAI**) based on the content prompts. The AI agent generates both images and text content, ensuring that the output aligns with the distributor’s specifications.
 
 ### Automatic Posting to Worker Dashboard
 Once the AI agent generates the content, it is automatically posted to the **Worker Dashboard**. This seamless integration saves time and effort by eliminating manual content handling.
@@ -142,7 +142,7 @@ Workers earn platform tokens for participating in the content evaluation process
 
 ## AI Integration and Content Generation
 
-### On-Chain AI Agent (Galetarial)
+### On-Chain AI Agent (Galadriel)
 The AI agent is responsible for generating content, operating **on-chain** using smart contracts. It manages the process of **AI image generation**, ensuring that the entire process is transparent, secure, and tamper-proof. Models like **DALL-E** and **OpenAI** are integrated for creating both image and text content based on provided prompts.
 
 ### AI Model Selection and Customization
